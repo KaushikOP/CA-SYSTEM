@@ -34,10 +34,13 @@ $(document).ready(function() {
             url: 'fetchClientList.php', // your php file
             type: 'POST', // type of the HTTP request
             data: { "id": id },
-            success: function(data) {
-                var obj = jQuery.parseJSON(data);
-                $("#clientAddr").val(obj[0]);
-                $("#clientGST").val(obj[1]);
+            success: function(result) {
+                if(result){
+                    obj = JSON.parse(result);
+                    $("#clientAddr").val(obj[0]);
+                    $("#clientGST").val(obj[1]);
+                }
+
             }
         });
     });
@@ -54,13 +57,16 @@ $(document).ready(function() {
 
         //alert(id);
         $.ajax({
-            url: 'test.php', // your php file
+            url: 'fetchClientList.php', // your php file
             type: 'POST', // type of the HTTP request
             data: { "id": id },
-            success: function(data) {
-                var obj = jQuery.parseJSON(data);
-                $("#NclientAddr").val(obj[0]);
-                $("#NclientGST").val(obj[1]);
+            success: function(result) {
+                if(result){
+                    var obj = JSON.parse(result);
+                    $("#NclientAddr").val(obj[0]);
+                    $("#NclientGST").val(obj[1]);
+
+                }
             }
         });
     });
@@ -78,6 +84,20 @@ $(document).ready(function() {
         $("#selectNGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterNGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterNGST + "' value='" + $("#NGSTPerticularName").val() + "'readonly><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterNGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterNGST + "'  onclick='removeNGSTDivision(" + counterNGST + ")' >Remove</button></div>");
         $("#NGSTPerticularName").val("");
         counterNGST++;
+    });
+
+
+    $("#firm").change(function() {
+        var firmId = $('#firm').val();
+        $.ajax({
+            method: 'GET',
+            url: "getInvoiceNo.php", 
+            data: 'firmId='+firmId,
+            success: function(result){
+                $('#invoiceNumber').val(result[0]);
+                $('#NinvoiceNumber').val(result[0]);
+            }
+        });
     });
 });
 

@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Data Management System</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <link href="Bootstrap/css/bootstrap.min.css">
-        <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="JS/fill.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Management System</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <?php
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="Bootstrap/css/bootstrap.min.css">
+    <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="JS/fill.js"></script>
+
+    <?php
         include 'connect.php';
 
         $sql="select * from clientlist order by clientName";
@@ -36,7 +48,7 @@
         }
         ?>
 
-        <style>
+    <style>
         .footer {
             position: fixed;
             left: 0;
@@ -44,359 +56,382 @@
             width: 100%;
         }
 
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        </style>
+    </style>
 
-        <script>
-        
-        </script>
-    </head>
-    <body class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+</head>
+
+<body class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="#">DMS</a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
         </div>
-        </nav>
+    </nav>
 
 
-        <div class="m-5 p-5 border border-muted bg-light text-dark">
+    <div class="m-5 p-5 border border-muted bg-light text-dark">
 
         <h2 class="text-center">Invoice Generation</h2>
         <hr>
 
 
         <div class="m-3">
-        <div class="col-auto">
-            <b><label  class="col-form-label">Firm Selection</label></b>
-        </div>
-        <div class=" col-auto">
-            <select id="firm" class="custom-select" required>
-                <option selected disabled value="0">Choose Firm</option>
-                <option value="1">Jinal Waghela & Associates</option>
-                <option value="2">MoneySphere Solutions</option>
-                <option value="3">H. Mistry & Associates</option>
-            </select>
-        </div>
-        <div class="col-auto">
-            <span id="clientNameHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
+            <div class="col-auto">
+                <b><label class="col-form-label">Firm Selection</label></b>
+            </div>
+            <div class="col-auto">
+                <select id="firm" class="custom-select" required>
+                    <option selected disabled value="0">Choose Firm</option>
+                    <option value="1">Jinal Waghela & Associates</option>
+                    <option value="2">MoneySphere Solutions</option>
+                    <option value="3">H. Mistry & Associates</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <span id="clientNameHelpInline" class="form-text">
+                    Must be 8-20 characters long.
+                </span>
+            </div>
         </div>
 
         <hr>
+        
         <h3 id="firmName" class="text-center text-primary"></h3>
-        <form id="GSTForm" class="border border-dark" action="a.php" method="POST">
-        
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="invoiceNumber" class="col-form-label">Invoice Number: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="invoiceNumber" class="form-control" aria-describedby="invoiceNumberHelpInline" readonly>
-        </div>
-        <div class="col-auto">
-            <span id="invoiceNumberHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+
+        <form id="GSTForm" class="border border-dark" action="insertInvoiceData.php" method="POST">
+
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="invoiceNumber" class="col-form-label">Invoice Number: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="invoiceNumber" id="invoiceNumber" class="form-control"
+                        aria-describedby="invoiceNumberHelpInline" readonly>
+                </div>
+                <div class="col-auto">
+                    <span id="invoiceNumberHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="invoiceDate" class="col-form-label">Invoice Date: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="date" class="form-control" id="invoiceDate" placeholder="YYYY-MM-DD" autocomplete="off" aria-describedby="invoiceDateHelpInline">
-        </div>
-        <div class="col-auto">
-            <span id="invoiceDateHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
-        
-        
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="clientName" class="col-form-label">Client Name: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="clientName" class="form-control" aria-label="Default select example" list="cityname">
-            
-            <datalist id="cityname">
-            <?php
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="invoiceDate" class="col-form-label">Invoice Date: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="date" class="form-control" name="invoiceDate" id="invoiceDate" placeholder="YYYY-MM-DD" autocomplete="off"
+                        aria-describedby="invoiceDateHelpInline">
+                </div>
+                <div class="col-auto">
+                    <span id="invoiceDateHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="clientName" class="col-form-label">Client Name: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="clientName" name="clientName" class="form-control" aria-label="Default select example"
+                        list="cityname">
+
+                    <datalist id="cityname">
+                        <?php
                 $sql="select * from clientlist order by clientName";
                 $result=mysqli_query($con,$sql) or die($con->error);   
                 if($result->num_rows>0){
                     while($row=$result->fetch_assoc()){
                     
                 ?>
-            <option data-id="<?php echo $row['clientId']; ?>"  ><?php echo $row['clientName']; ?></option>
-            <?php 
+                        <option data-id="<?php echo $row['clientId']; ?>">
+                            <?php echo $row['clientName']; ?>
+                        </option>
+                        <?php 
                     }
                 }
                 ?>
-             </datalist>
-        </div>
-        <div class="col-auto">
-            <span id="clientNameHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+                    </datalist>
+                </div>
+                <div class="col-auto">
+                    <span id="clientNameHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="clientAddr" class="col-form-label">Client Address: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="clientAddr" class="form-control" aria-describedby="clientAddrHelpInline" Readonly>
-        </div>
-        <div class="col-auto">
-            <span id="clientAddrHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="clientAddr" class="col-form-label">Client Address: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="clientAddr" name="clientAddr" class="form-control" aria-describedby="clientAddrHelpInline"
+                        Readonly>
+                </div>
+                <div class="col-auto">
+                    <span id="clientAddrHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="clientGST" class="col-form-label">Client GST: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="clientGST" class="form-control" aria-describedby="clientGSTHelpInline" Readonly>
-        </div>
-        <div class="col-auto">
-            <span id="clientGSTHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="clientGST" class="col-form-label">Client GST: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="clientGST" name="clientGST" class="form-control" aria-describedby="clientGSTHelpInline"
+                        Readonly>
+                </div>
+                <div class="col-auto">
+                    <span id="clientGSTHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="clientName" class="col-form-label">State Code: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="clientName" class="form-control" aria-describedby="clientNameHelpInline">
-        </div>
-        <div class="col-auto">
-            <span id="clientNameHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="stateCode" class="col-form-label">State Code: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="stateCode" name="stateCode" class="form-control" aria-describedby="stateCodeHelpline">
+                </div>
+                <div class="col-auto">
+                    <span id="stateCodeHelpline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-         <hr>
+            <hr>
 
-        <h4 class="text-center m-3">Invoice Particulars</h4>
+            <h4 class="text-center m-3">Invoice Particulars</h4>
 
-        <div id="perticularsGSTDrpDwn">
-        
-        
-        <div id="selectGSTParticular" class="m-3 row col-auto">
-            <div class="col-auto"><b><label for="clientName" class="col-form-label">Add Particulars: </label></b></div>
-            <div class="col-6">
-            <input type="text" id="perticularGSTName" class="form-control" aria-label="Default select example" list="perticulersGST">
-            
-            <datalist id="perticulersGST">
-            <?php
+            <div id="perticularsGSTDrpDwn">
+
+
+                <div id="selectGSTParticular" class="m-3 row col-auto">
+                    <div class="col-auto"><b><label for="clientName" class="col-form-label">Add Particulars:
+                            </label></b></div>
+                    <div class="col-6">
+                        <input type="text" id="perticularGSTName" class="form-control"
+                            aria-label="Default select example" list="perticulersGST">
+
+                        <datalist id="perticulersGST">
+                            <?php
                 $sql1="select * from services where firmNameId=3";
                 $result=mysqli_query($con,$sql1) or die($con->error);   
                 if($result->num_rows>0){
                     while($row1=$result->fetch_assoc()){
                     
                 ?>
-            <option><?php echo $row1["serviceDescription"]; ?></option>
-            <?php 
+                            <option>
+                                <?php echo $row1["serviceDescription"]; ?>
+                            </option>
+                            <?php 
                     }
                 }
                 ?>
-             </datalist>
-        </div>
-        <div class="col-auto">
-            <button type="button" id="addBtn" class="btn btn-primary">Add Particular</button>
-        </div>
-        </div>
-        
-        </div>
+                        </datalist>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" id="addBtn" class="btn btn-primary">Add Particular</button>
+                    </div>
+                </div>
+
+            </div>
 
 
-        <hr>
+            <hr>
 
-        <div class="m-3 col-auto form-inline">
-            <input type="submit" class="btn btn-success form-inline m-auto">
-            <input type="button" id="clear" class="btn btn-danger form-inline m-auto" value="Clear">
-        </div>
+            <div class="m-3 col-auto form-inline">
+                <input type="submit" class="btn btn-success form-inline m-auto">
+                <input type="button" id="clear" class="btn btn-danger form-inline m-auto" value="Clear">
+            </div>
 
-        
+
         </form>
 
 
 
 
-        <form id="NGSTForm" class="border border-dark" method="POST">
-        
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="NinvoiceNumber" class="col-form-label">Invoice Number: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="NinvoiceNumber" class="form-control" aria-describedby="NinvoiceNumberHelpInline" readonly>
-        </div>
-        <div class="col-auto">
-            <span id="NinvoiceNumberHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+        <form id="NGSTForm" action="insertInvoiceData.php" class="border border-dark" method="POST">
+
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="NinvoiceNumber" class="col-form-label">Invoice Number: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="NinvoiceNumber" id="NinvoiceNumber" class="form-control"
+                        aria-describedby="NinvoiceNumberHelpInline" readonly>
+                </div>
+                <div class="col-auto">
+                    <span id="NinvoiceNumberHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="NinvoiceDate" class="col-form-label">Invoice Date: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="date" class="form-control" id="NinvoiceDate" placeholder="YYYY-MM-DD" autocomplete="off" aria-describedby="NinvoiceDateHelpInline">
-        </div>
-        <div class="col-auto">
-            <span id="NinvoiceDateHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
-        
-        
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="NclientName" class="col-form-label">Client Name: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="NclientName" class="form-control" aria-label="Default select example" list="cityname">
-            
-            <datalist id="Ncityname">
-            <?php
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="NinvoiceDate" class="col-form-label">Invoice Date: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="date" class="form-control" name="NinvoiceDate" id="NinvoiceDate" placeholder="YYYY-MM-DD"
+                        autocomplete="off" aria-describedby="NinvoiceDateHelpInline">
+                </div>
+                <div class="col-auto">
+                    <span id="NinvoiceDateHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="NclientName" class="col-form-label">Client Name: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="NclientName" name="NclientName" class="form-control" aria-label="Default select example"
+                        list="cityname">
+
+                    <datalist id="Ncityname">
+                        <?php
                 $sql="select * from clientlist order by clientName";
                 $result=mysqli_query($con,$sql) or die($con->error);   
                 if($result->num_rows>0){
                     while($row=$result->fetch_assoc()){
                     
                 ?>
-            <option data-id="<?php echo $row['clientId']; ?>"  ><?php echo $row['clientName']; ?></option>
-        <?php 
+                        <option data-id="<?php echo $row['clientId']; ?>">
+                            <?php echo $row['clientName']; ?>
+                        </option>
+                        <?php 
                     }
                 }
                 ?>
-             </datalist>
-            </select>
-        </div>
-        <div class="col-auto">
-            <span id="NclientNameHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+                    </datalist>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <span id="NclientNameHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
 
-        <div class="m-3">
-        <div class="col-auto">
-            <b><label for="NclientAddr" class="col-form-label">Client Address: </label></b>
-        </div>
-        <div class="col-auto">
-            <input type="text" id="NclientAddr" class="form-control" aria-describedby="NclientAddrHelpInline" Readonly>
-        </div>
-        <div class="col-auto">
-            <span id="NclientAddrHelpInline" class="form-text">
-            Must be 8-20 characters long.
-            </span>
-        </div>
-        </div>
+            <div class="m-3">
+                <div class="col-auto">
+                    <b><label for="NclientAddr" class="col-form-label">Client Address: </label></b>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="NclientAddr" name="NclientAddr" class="form-control" aria-describedby="NclientAddrHelpInline"
+                        Readonly>
+                </div>
+                <div class="col-auto">
+                    <span id="NclientAddrHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div>
 
-        <hr>
+            <hr>
 
-        <h4 class="text-center m-3">Invoice Particulars</h4>
+            <h4 class="text-center m-3">Invoice Particulars</h4>
 
-        <div id="perticularsNGSTDrpDwn">
-        
-        
-        <div id="selectNGSTParticular" class="m-3 row col-auto">
-            <div class="col-auto"><b><label for="clientName" class="col-form-label">Add Particulars: </label></b></div>
-            <div class="col-6">
-            <input type="text" id="NGSTPerticularName" class="form-control" aria-label="Default select example" list="perticulersNGST">
-            
-            <datalist id="perticulersNGST">
-            <?php
+            <div id="perticularsNGSTDrpDwn">
+
+
+                <div id="selectNGSTParticular" class="m-3 row col-auto">
+                    <div class="col-auto"><b><label for="clientName" class="col-form-label">Add Particulars:
+                            </label></b></div>
+                    <div class="col-6">
+                        <input type="text" id="NGSTPerticularName" class="form-control"
+                            aria-label="Default select example" list="perticulersNGST">
+
+                        <datalist id="perticulersNGST">
+                            <?php
                 $sql2="select * from services where SAC=0";
                 $result=mysqli_query($con,$sql2) or die($con->error);   
                 if($result->num_rows>0){
                     while($row2=$result->fetch_assoc()){
                     
                 ?>
-            <option><?php echo $row2["serviceDescription"]; ?></option>
-            <?php 
+                            <option>
+                                <?php echo $row2["serviceDescription"]; ?>
+                            </option>
+                            <?php 
                     }
                 }
                 ?>
-             </datalist>
-        </div>
-        <div class="col-auto">
-            <button type="button" id="addNBtn" class="btn btn-primary">Add Particular</button>
-        </div>
-        </div>
-        
-        </div>
+                        </datalist>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" id="addNBtn" class="btn btn-primary">Add Particular</button>
+                    </div>
+                </div>
+
+            </div>
 
 
-        <hr>
+            <hr>
 
 
-        <div class="m-3 col-auto form-inline">
-            <input type="submit" class="btn btn-success form-inline m-auto">
-            <input type="button" id="clear" class="btn btn-danger form-inline m-auto" value="Clear">
-        </div>
-        
+            <div class="m-3 col-auto form-inline">
+                <input type="submit" class="btn btn-success form-inline m-auto">
+                <input type="button" id="clear" class="btn btn-danger form-inline m-auto" value="Clear">
+            </div>
+
         </form>
 
 
 
-        </div>
+    </div>
 
-            <!-- Footer -->
-            <footer class="footer bg-dark">
-                <div class="text-center text-light">    
-                    <h3>Data Management System for CA</h3>
-                </div>
-            </footer>
-            <!-- Footer -->
-    </body>
+    <!-- Footer -->
+    <footer class="footer bg-dark">
+        <div class="text-center text-light">
+            <h3>Data Management System for CA</h3>
+        </div>
+    </footer>
+    <!-- Footer -->
+</body>
+
 </html>
