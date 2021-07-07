@@ -42,10 +42,12 @@
             $totalAmount += $totalAmount*0.18;
         }
 
+        // print_r($formData);
+        // echo "\n";
         // print_r($particulars);
 
 
-        $queryBillMaster = "insert into bill_master(invoice_no,firm_id,invoice_date,client_id,total_amount) values('".$formData[0]."',".$firmId.",'".$formData[1]."',".$clientId.",".$totalAmount.")";
+        $queryBillMaster = "insert into bill_master(invoice_no,firm_id,invoice_date,client_id,total_amount,state_code) values('".$formData[0]."',".$firmId.",'".$formData[1]."',".$clientId.",".$totalAmount.",".$formData[5].")";
         $result = mysqli_query($con,$queryBillMaster);
 
         if($result){
