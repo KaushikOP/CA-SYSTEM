@@ -2,8 +2,6 @@
 
 include "connect.php";
 
-
-
 if(isset($_POST)){
     $client = $_POST["id"];
     setcookie('clientId',$client);  // clientId for bill_master insert query
