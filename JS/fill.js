@@ -112,6 +112,10 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#stateCode').change(function(){
+        alert($('#stateCode').val());
+    });
 });
 
 function removeGSTDivision(cnt) {
