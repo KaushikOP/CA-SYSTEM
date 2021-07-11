@@ -46,6 +46,9 @@ include 'connect.php';
 <body>
     <div class="container-fluid mt-3">
         <h1 class="text-center">Receivables</h1>
+        <div class="form-check-inline">
+
+        </div>
         <table id="tbl" class="table table-responsive-md table-responsive-sm table-striped table-bordered mt-5" width="100%">
             <thead width="100%" style="background-color: rgb(79,129,189);">
                 <tr style="color:white;">
@@ -55,7 +58,7 @@ include 'connect.php';
                     <th>Date</th>
                     <th>Party</th>
                     <th>Amount</th>
-                    <th>Amount Received</th>
+                    <th>Amt Received</th>
                     <th>Receipt Date</th>
                     <th>Mode</th>
                     <th>Chq. No.</th>
@@ -65,7 +68,6 @@ include 'connect.php';
                 </tr>
             </thead>
             <tbody width="100%">
-
                 <?php
                 $query = "select * from bill_master bm inner join clientlist cl inner join firmname fn INNER join gst_state_code_list sc 
                             on bm.firm_id = fn.firmNameId and bm.client_id = cl.clientId and bm.state_code = sc.state_code";
@@ -75,7 +77,6 @@ include 'connect.php';
                     while ($row = mysqli_fetch_assoc($result)) {
                         $row_count += 1;
                 ?>
-
                 <tr>
                     <td class="text-center">
                         <?php echo $row_count; ?>
