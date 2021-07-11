@@ -40,16 +40,22 @@
 
         if($firmId==3){
             $totalAmount += $totalAmount*0.18;
+            $queryBillMaster = "insert into bill_master values('".$formData[0]."',".$firmId.",'".$formData[1]."',".$clientId.",".$totalAmount.",0,0,0,0,0,0,".$formData[5].")";
+        }else{
+            $queryBillMaster = "insert into bill_master values('".$formData[0]."',".$firmId.",'".$formData[1]."',".$clientId.",".$totalAmount.",0,0,0,0,0,0,null)";
         }
 
         // print_r($formData);
         // echo "\n";
         // print_r($particulars);
 
+        // echo $firmId;
+        // echo $clientId;
+        // echo $totalAmount;
+        // echo $queryBillMaster;
 
-        $queryBillMaster = "insert into bill_master values('".$formData[0]."',".$firmId.",'".$formData[1]."',".$clientId.",".$totalAmount.",0,0,0,0,0,0".$formData[5].")";
         $result = mysqli_query($con,$queryBillMaster);
-
+        
         if($result){
             
             foreach ($particulars as $pID => $pAmount) {
@@ -72,7 +78,12 @@
         }else{
             echo "<script>alert('Error during Bill Master Generation');</script>";
         }  
-        header("Location:./moneySphereBill.php");
+        
+        echo "
+            <script>
+                window.location = './fill.html';
+            </script>
+        ";  
 
     }
 

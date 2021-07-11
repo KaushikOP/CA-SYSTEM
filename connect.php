@@ -1,9 +1,9 @@
 <?php
 
-	$dbhost = "freedb.tech";
-	$dbuser = "freedbtech_casystem";
-	$dbpass = "casystem";
-	$db = "freedbtech_CASystem";
+	$dbhost = "localhost";
+	$dbuser = "root";
+	$dbpass = "";
+	$db = "casystem";
 		
 	$con = new mysqli($dbhost, $dbuser, $dbpass, $db) or die("unable to connect");		 
 

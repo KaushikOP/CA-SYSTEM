@@ -92,8 +92,6 @@ $(document).ready(function() {
             return this.value == pName;
         }).data('id');
 
-
-
         $("#selectNGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterNGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterNGST + "' value='" + $("#NGSTPerticularName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterNGST + "' value='"+id+"'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterNGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterNGST + "'  onclick='removeNGSTDivision(" + counterNGST + ")' >Remove</button></div>");
         $("#NGSTPerticularName").val("");
         counterNGST++;
@@ -113,9 +111,6 @@ $(document).ready(function() {
         });
     });
 
-    $('#stateCode').change(function(){
-        alert($('#stateCode').val());
-    });
 });
 
 function removeGSTDivision(cnt) {

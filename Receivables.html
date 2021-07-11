@@ -69,8 +69,7 @@ include 'connect.php';
             </thead>
             <tbody width="100%">
                 <?php
-                $query = "select * from bill_master bm inner join clientlist cl inner join firmname fn INNER join gst_state_code_list sc 
-                            on bm.firm_id = fn.firmNameId and bm.client_id = cl.clientId and bm.state_code = sc.state_code";
+                $query = "select * from bill_master bm inner join clientlist cl inner join firmname fn on bm.firm_id = fn.firmNameId and bm.client_id = cl.clientId";
                 $result = mysqli_query($con, $query);
                 if ($result->num_rows > 0) {
                     $row_count = 0;
