@@ -62,7 +62,6 @@
                 $tax_amount = 0;
                 if($firmId==3){
                     $tax_amount = $pAmount + $pAmount*0.18;
-                    echo $tax_amount;
                 }
                 $queryBillDetails = "insert into bill_details (bill_master_id,firm_id,service_id,taxable_amount,tax_amount) 
                                     values('".$formData[0]."','".$firmId."',".$pID.",".$pAmount.",".$tax_amount.")";
