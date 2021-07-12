@@ -1,9 +1,7 @@
 <?php
 include 'connect.php';
 
-if(isset($_POST)){
-    print_r($_POST);
-}
+$resultTable=null;
 ?>
 
 
@@ -49,30 +47,61 @@ if(isset($_POST)){
             $("#filterSelect").click(function(){
                 alert("H");
             });
+
+            $("#filterBtn").click(function(){
+                
+                var firm1 = 0,firm2 = 0,firm3 = 0;
+
+                if($("#firm1").prop("checked")){
+                    firm1 = $("#firm1").val();
+                }
+                if($("#firm2").prop("checked")){
+                    firm2 = $("#firm2").val();
+                }
+                if($("#firm3").prop("checked")){
+                    firm3 = $("#firm3").val();
+                }
+
+                var clientId = $('#cityname option').filter(function() {
+                    return this.value == $("#clientName").val();
+                }).data('id');
+                
+                $.ajax({
+                    url: 'filterReceivables.php', // your php file
+                    type: 'POST', // type of the HTTP request
+                    data: { "firm1": firm1,"firm2": firm2, "firm3": firm3, "clientId": clientId},
+                    success: function(result) {
+                        if(result){
+                            obj = JSON.parse(result);
+                            $("#firmName").val(obj[0]['shortname']);
+                            $(document).cookie="objCookie="+JSON.stringify(obj);
+                        }
+
+                    }
+                });
+            });
         });
     </script>
-
     <title>Receivables</title>
 </head>
 
 <body>
     <div class="container-fluid mt-3">
         <h1 class="text-center">Receivables</h1>
-        <a class="text-center pl-5 ml-5" id="filterSelect" href="#">Filter</a>
+        <a class="text-center pl-5 ml-5" id="filterSelect">Filter</a>
         <div id="filter" class="border border-2 p-5 m-5">
-            <form action="#" method="POST">
                 <div class="row col-12 form-group">
                     <h5 class="col-2">Select Firm:</h5>
                     <div class="form-check col-2 form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3" checked>
+                        <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3">
                         <label class="form-check-label" for="firm1">H Mistry & Associates</label>
                     </div>
                     <div class="form-check col-2 form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1" checked>
+                        <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1">
                         <label class="form-check-label" for="firm2">Jinal Waghela & Associates</label>
                     </div>
                     <div class="form-check col-2 form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="firm2" name="firm2" value="2" checked>
+                        <input class="form-check-input" type="checkbox" id="firm2" name="firm2" value="2">
                         <label class="form-check-label" for="firm3">MoneySphere Solutions</label>
                     </div>
                 </div>
@@ -102,8 +131,7 @@ if(isset($_POST)){
                     </datalist>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-success col-auto mt-3">
-            </form>
+                <button id="filterBtn" class="btn btn-success col-auto mt-3">Filter</button>
         </div>
         <table id="tbl" class="table table-responsive-md table-responsive-sm table-striped table-bordered mt-5" width="100%">
             <thead style="background-color: rgb(79,129,189);">
@@ -126,8 +154,8 @@ if(isset($_POST)){
             <tbody>
                 <?php
                 $query = "select * from bill_master bm inner join clientlist cl inner join firmname fn on bm.firm_id = fn.firmNameId and bm.client_id = cl.clientId";
-                $result = mysqli_query($con, $query);
-                if ($result->num_rows > 0) {
+                $resultTable = mysqli_query($con, $query);
+                if ($resultTable->num_rows > 0) {
                     $row_count = 0;
                     while ($row = mysqli_fetch_assoc($result)) {
                         $row_count += 1;
@@ -136,7 +164,7 @@ if(isset($_POST)){
                     <td class="text-center">
                         <?php echo $row_count; ?>
                     </td>
-                    <td class="text-left">
+                    <td class="text-left" >
                         <?php echo $row['shortform']; ?>
                     </td>
                     <td class="text-left">
