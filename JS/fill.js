@@ -105,8 +105,8 @@ $(document).ready(function() {
             url: "getInvoiceNo.php", 
             data: 'firmId='+firmId,
             success: function(result){
-                $('#invoiceNumber').val(result[0]);
-                $('#NinvoiceNumber').val(result[0]);
+                $('#invoiceNumber').val(result);
+                $('#NinvoiceNumber').val(result);
             }
         });
     });
