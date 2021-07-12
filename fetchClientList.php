@@ -14,6 +14,7 @@ if(isset($_POST)){
             while($row=mysqli_fetch_assoc($result)){
                 array_push($clientDetails,$row["clientAddress"]);
                 array_push($clientDetails,$row["GST"]);
+                array_push($clientDetails,$row["clientName"]);
                 // echo json_encode($row);
             }
             

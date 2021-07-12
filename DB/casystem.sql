@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2021 at 09:09 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: Jul 11, 2021 at 12:23 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,8 +18,66 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dmsca`
+-- Database: `casystem`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill_details`
+--
+
+CREATE TABLE `bill_details` (
+  `bill_details_id` int(11) NOT NULL,
+  `bill_master_id` varchar(15) CHARACTER SET latin1 NOT NULL,
+  `firm_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `taxable_amount` double NOT NULL,
+  `tax_amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bill_details`
+--
+
+INSERT INTO `bill_details` (`bill_details_id`, `bill_master_id`, `firm_id`, `service_id`, `taxable_amount`, `tax_amount`) VALUES
+(1, '0', 3, 4, 1000, 1180),
+(2, '0', 3, 1, 2000, 2360),
+(3, '1', 3, 4, 2000, 2360),
+(4, '1', 3, 1, 3029, 3574.22),
+(5, '1', 3, 2, 450, 531),
+(6, '0', 1, 9, 1000, 0),
+(7, '0', 1, 10, 2000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill_master`
+--
+
+CREATE TABLE `bill_master` (
+  `invoice_no` varchar(15) NOT NULL,
+  `firm_id` int(11) NOT NULL,
+  `invoice_date` date NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `total_amount` double NOT NULL,
+  `amount_received` int(11) DEFAULT NULL,
+  `receipt_date` date DEFAULT NULL,
+  `payment_mode` text DEFAULT NULL,
+  `cheque_no` text DEFAULT NULL,
+  `amount_pending` text DEFAULT NULL,
+  `tds` double DEFAULT NULL,
+  `state_code` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bill_master`
+--
+
+INSERT INTO `bill_master` (`invoice_no`, `firm_id`, `invoice_date`, `client_id`, `total_amount`, `amount_received`, `receipt_date`, `payment_mode`, `cheque_no`, `amount_pending`, `tds`, `state_code`) VALUES
+('0', 1, '2021-07-01', 3, 3000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('0', 3, '2021-07-02', 1, 3540, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('1', 3, '2021-04-09', 4, 6465.22, 0, '0000-00-00', '0', '0', '0', 0, 24);
 
 -- --------------------------------------------------------
 
@@ -68,6 +125,60 @@ INSERT INTO `firmname` (`firmNameId`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gst_state_code_list`
+--
+
+CREATE TABLE `gst_state_code_list` (
+  `state_code` int(11) NOT NULL,
+  `state_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `gst_state_code_list`
+--
+
+INSERT INTO `gst_state_code_list` (`state_code`, `state_name`) VALUES
+(1, 'JAMMU AND KASHMIR'),
+(2, 'HIMACHAL PRADESH'),
+(3, 'PUNJAB'),
+(4, 'CHANDIGARH'),
+(5, 'UTTARAKHAND'),
+(6, 'HARYANA'),
+(7, 'DELHI'),
+(8, 'RAJASTHAN'),
+(9, 'UTTAR PRADESH'),
+(10, 'BIHAR'),
+(11, 'SIKKIM'),
+(12, 'ARUNACHAL PRADESH'),
+(13, 'NAGALAND'),
+(14, 'MANIPUR'),
+(15, 'MIZORAM'),
+(16, 'TRIPURA'),
+(17, 'MEGHALAYA'),
+(18, 'ASSAM'),
+(19, 'WEST BENGAL'),
+(20, 'JHARKHAND'),
+(21, 'ODISHA'),
+(22, 'CHATTISGARH'),
+(23, 'MADHYA PRADESH'),
+(24, 'GUJARAT'),
+(25, 'HARYANA'),
+(26, 'DADRA AND NAGAR HAVELI AND DAMAN AND DIU'),
+(27, 'MAHARASHTRA'),
+(29, 'KARNATAKA'),
+(30, 'GOA'),
+(31, 'LAKSHADWEEP'),
+(32, 'KERALA'),
+(33, 'TAMIL NADU'),
+(34, 'PUDUCHERRY'),
+(35, 'ANDAMAN AND NICOBAR ISLANDS'),
+(36, 'TELANGANA'),
+(37, 'ANDHRA PRADESH'),
+(38, 'LADAKH ');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `services`
 --
 
@@ -100,6 +211,24 @@ INSERT INTO `services` (`serviceId`, `serviceName`, `serviceDescription`, `SAC`,
 --
 
 --
+-- Indexes for table `bill_details`
+--
+ALTER TABLE `bill_details`
+  ADD PRIMARY KEY (`bill_details_id`),
+  ADD KEY `service_id` (`service_id`),
+  ADD KEY `firm_id` (`firm_id`),
+  ADD KEY `bill_master_id` (`bill_master_id`);
+
+--
+-- Indexes for table `bill_master`
+--
+ALTER TABLE `bill_master`
+  ADD PRIMARY KEY (`invoice_no`,`firm_id`),
+  ADD KEY `firm_id` (`firm_id`),
+  ADD KEY `client_id` (`client_id`),
+  ADD KEY `bill_master_ibfk_3` (`state_code`);
+
+--
 -- Indexes for table `clientlist`
 --
 ALTER TABLE `clientlist`
@@ -112,6 +241,12 @@ ALTER TABLE `firmname`
   ADD PRIMARY KEY (`firmNameId`);
 
 --
+-- Indexes for table `gst_state_code_list`
+--
+ALTER TABLE `gst_state_code_list`
+  ADD PRIMARY KEY (`state_code`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -121,6 +256,12 @@ ALTER TABLE `services`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bill_details`
+--
+ALTER TABLE `bill_details`
+  MODIFY `bill_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `clientlist`
@@ -135,6 +276,12 @@ ALTER TABLE `firmname`
   MODIFY `firmNameId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `gst_state_code_list`
+--
+ALTER TABLE `gst_state_code_list`
+  MODIFY `state_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
@@ -143,6 +290,22 @@ ALTER TABLE `services`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bill_details`
+--
+ALTER TABLE `bill_details`
+  ADD CONSTRAINT `bill_details_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `services` (`serviceId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bill_details_ibfk_3` FOREIGN KEY (`firm_id`) REFERENCES `firmname` (`firmNameId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bill_details_ibfk_4` FOREIGN KEY (`bill_master_id`) REFERENCES `bill_master` (`invoice_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bill_master`
+--
+ALTER TABLE `bill_master`
+  ADD CONSTRAINT `bill_master_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `firmname` (`firmNameId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bill_master_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clientlist` (`clientId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bill_master_ibfk_3` FOREIGN KEY (`state_code`) REFERENCES `gst_state_code_list` (`state_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `services`

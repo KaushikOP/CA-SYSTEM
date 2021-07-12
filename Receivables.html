@@ -1,5 +1,9 @@
 <?php
 include 'connect.php';
+
+if(isset($_POST)){
+    print_r($_POST);
+}
 ?>
 
 
@@ -40,17 +44,69 @@ include 'connect.php';
         crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->
 
+    <script>
+        $(document).ready(function(){
+            $("#filterSelect").click(function(){
+                alert("H");
+            });
+        });
+    </script>
+
     <title>Receivables</title>
 </head>
 
 <body>
     <div class="container-fluid mt-3">
         <h1 class="text-center">Receivables</h1>
-        <div class="form-check-inline">
+        <a class="text-center pl-5 ml-5" id="filterSelect" href="#">Filter</a>
+        <div id="filter" class="border border-2 p-5 m-5">
+            <form action="#" method="POST">
+                <div class="row col-12 form-group">
+                    <h5 class="col-2">Select Firm:</h5>
+                    <div class="form-check col-2 form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3" checked>
+                        <label class="form-check-label" for="firm1">H Mistry & Associates</label>
+                    </div>
+                    <div class="form-check col-2 form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1" checked>
+                        <label class="form-check-label" for="firm2">Jinal Waghela & Associates</label>
+                    </div>
+                    <div class="form-check col-2 form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="firm2" name="firm2" value="2" checked>
+                        <label class="form-check-label" for="firm3">MoneySphere Solutions</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row col-12">
+                    <h5 class="col-2">Select client:</h5>
+                    <div class="col-4">
+                    <input type="text" id="clientName" name="clientName" class="form-control" aria-label="Default select example"
+                        list="cityname" value="All Clients">
 
+                    <datalist id="cityname">
+                        <option data-id="0" selected >All Clients</option>
+                        <?php
+                $sql="select * from clientlist order by clientName";
+                $result=mysqli_query($con,$sql) or die($con->error);   
+                if($result->num_rows>0){
+                    while($row=$result->fetch_assoc()){
+                    
+                ?>
+                        <option data-id="<?php echo $row['clientId']; ?>">
+                            <?php echo $row['clientName']; ?>
+                        </option>
+                        <?php 
+                    }
+                }
+                ?>
+                    </datalist>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success col-auto mt-3">
+            </form>
         </div>
         <table id="tbl" class="table table-responsive-md table-responsive-sm table-striped table-bordered mt-5" width="100%">
-            <thead width="100%" style="background-color: rgb(79,129,189);">
+            <thead style="background-color: rgb(79,129,189);">
                 <tr style="color:white;">
                     <th>Sr. No.</th>
                     <th>Firm Name</th>
@@ -58,7 +114,7 @@ include 'connect.php';
                     <th>Date</th>
                     <th>Party</th>
                     <th>Amount</th>
-                    <th>Amt Received</th>
+                    <th>Amount Received</th>
                     <th>Receipt Date</th>
                     <th>Mode</th>
                     <th>Chq. No.</th>
@@ -67,7 +123,7 @@ include 'connect.php';
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody width="100%">
+            <tbody>
                 <?php
                 $query = "select * from bill_master bm inner join clientlist cl inner join firmname fn on bm.firm_id = fn.firmNameId and bm.client_id = cl.clientId";
                 $result = mysqli_query($con, $query);
@@ -81,7 +137,7 @@ include 'connect.php';
                         <?php echo $row_count; ?>
                     </td>
                     <td class="text-left">
-                        <?php echo $row['name']; ?>
+                        <?php echo $row['shortform']; ?>
                     </td>
                     <td class="text-left">
                         <?php echo $row['invoice_no']; ?>
@@ -113,20 +169,20 @@ include 'connect.php';
                                     ?>
                         </div>
                     </td>
-                    <td class="text-right"><input type="date" id="<?php echo $row_count . 'rDate'; ?>"
+                    <td class="text-right"><input type="date" class="form-control" id="<?php echo $row_count . 'rDate'; ?>"
                             value="<?php echo $row['receipt_date']; ?>" disabled></td>
                     <td class="text-left">
-                        <select id="<?php echo $row_count.'mode' ?>" disabled>
+                        <select class="form-control" id="<?php echo $row_count.'mode' ?>" disabled>
                             <option value="online" selected>Online</option>
                             <option value="cheque">Cheque</option>
                             <option value="cash">Cash</option>
                         </select>
                     </td>
-                    <td class="text-left" ><input type="text" id="<?php echo $row_count . 'chq'; ?>"
+                    <td class="text-left col-1" ><input type="text" class="form-control" id="<?php echo $row_count . 'chq'; ?>"
                             value="<?php echo $row['cheque_no']; ?>" disabled></td>
-                    <td class="text-right"><input type="text" id="<?php echo $row_count . 'pending'; ?>"
+                    <td class="text-right col-1"><input type="text" class="form-control" id="<?php echo $row_count . 'pending'; ?>"
                             value="<?php echo $row['amount_pending']; ?>" disabled></td>
-                    <td class="text-left"><input type="text" id="<?php echo $row_count . 'tds'; ?>"
+                    <td class="text-left col-1"><input type="text" class="form-control" id="<?php echo $row_count . 'tds'; ?>"
                             value="<?php echo $row['tds']; ?>" disabled></td>
                     <td width="10%">
                         <div class="row col-12" width="100%" style="display:inline-block;">
