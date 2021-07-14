@@ -192,7 +192,7 @@ $resultTable=null;
       <hr />
       <div id="filter" class="border border-2 p-2 m-3" style="display: none">
         <div class="row col-12 form-group">
-          <h5 class="col-1">Select:</h5>
+          <h5 class="col-1">Select Firm:</h5>
           <div class="form-check col-2 form-check-inline">
             <input
               class="form-check-input"
@@ -200,6 +200,7 @@ $resultTable=null;
               id="firm1"
               name="firm1"
               value="1"
+              checked
             />
             <label class="form-check-label" for="firm2"
               >Jinal Waghela & Associates</label
@@ -212,6 +213,7 @@ $resultTable=null;
               id="firm2"
               name="firm2"
               value="2"
+              checked
             />
             <label class="form-check-label" for="firm3"
               >MoneySphere Solutions</label
@@ -224,12 +226,17 @@ $resultTable=null;
               id="firm3"
               name="firm3"
               value="3"
+              checked
             />
             <label class="form-check-label" for="firm1"
               >H Mistry & Associates</label
             >
           </div>
-          <div class="col-4">
+          <div class="col-4 row">
+            <div class="col-3">
+            <h5>Select Client:</h5></div>
+            <div class="col-1"></div>
+            <div class="col-8">
             <input
               type="text"
               id="clientName"
@@ -238,7 +245,7 @@ $resultTable=null;
               aria-label="Default select example"
               list="cityname"
               value="All Clients"
-              placeholder="Client Name"
+              placeholder="Select Client Name"
             />
 
             <datalist id="cityname">
@@ -256,7 +263,82 @@ $resultTable=null;
                 }
                 ?>
             </datalist>
+            </div>
           </div>
+        </div>
+        <div class="row col-12">
+            <div class="col-2"><h5 class="text-right">Select Financial Year:</h5></div>
+            <div class="col-3">
+            <input
+              type="text"
+              id="fYear"
+              name="fYear"
+              class="form-control"
+              aria-label="Default select example"
+              list="fYearList"
+              placeholder="Select Financial Year"
+            />
+
+            <datalist id="fYearList">
+                <option data-id="1" selected>2000-01</option>
+                <option data-id="2" selected>2001-02</option>
+                <option data-id="3" selected>2002-03</option>
+                <option data-id="4" selected>2003-04</option>
+                <option data-id="5" selected>2004-05</option>
+                <option data-id="6" selected>2005-06</option>
+                <option data-id="7" selected>2006-07</option>
+                <option data-id="8" selected>2007-08</option>
+                <option data-id="9" selected>2008-09</option>
+                <option data-id="10" selected>2009-10</option>
+                <option data-id="11" selected>2010-11</option>
+                <option data-id="12" selected>2011-12</option>
+                <option data-id="13" selected>2012-13</option>
+                <option data-id="14" selected>2013-14</option>
+                <option data-id="15" selected>2014-15</option>
+                <option data-id="16" selected>2015-16</option>
+                <option data-id="17" selected>2016-17</option>
+                <option data-id="18" selected>2017-18</option>
+                <option data-id="19" selected>2018-19</option>
+                <option data-id="20" selected>2019-20</option>
+                <option data-id="21" selected>2020-21</option>
+                <option data-id="22" selected>2021-22</option>
+                <option data-id="23" selected>2022-23</option>
+                <option data-id="24" selected>2023-24</option>
+                <option data-id="25" selected>2024-25</option>
+                <option data-id="26" selected>2026-27</option>
+                <option data-id="27" selected>2027-28</option>
+                <option data-id="28" selected>2028-29</option>
+                <option data-id="29" selected>2029-30</option>
+                <option data-id="30" selected>2030-31</option>
+                <option data-id="31" selected>2031-32</option>
+                <option data-id="32" selected>2032-33</option>
+                <option data-id="33" selected>2033-34</option>
+                <option data-id="34" selected>2034-35</option>
+                <option data-id="35" selected>2035-36</option>
+                <option data-id="36" selected>2036-37</option>
+                <option data-id="37" selected>2037-38</option>
+                <option data-id="38" selected>2038-39</option>
+                <option data-id="39" selected>2039-40</option>
+                <option data-id="40" selected>2040-41</option>
+            </datalist>
+          </div>
+          <div class="col-2 text-right"><h5>Select Client Group:</h5></div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="clientGrp"
+              name="clientGrp"
+              class="form-control"
+              aria-label="Default select example"
+              list="clientGrpList"
+              placeholder="Select Client Group"
+            />
+
+            <datalist id="clientGrpList">
+              <option data-id="0" selected>Client Groups</option>
+            </datalist>
+          </div>
+          <div class="col-2"></div>
         </div>
         <br />
         <center>
