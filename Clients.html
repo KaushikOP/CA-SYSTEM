@@ -85,13 +85,18 @@
             $('#tblDiv').load('#tblDiv .tbl');
         }
 
+        function addClient(){
+            location.replace('newClient.html');
+        }
+
     </script>
 </head>
 
 <body>
     <div class="container">
         <h1 class="mt-5 text-center bg-success p-2 col-auto" style="border-radius: 10px; color: white;">
-            Client Details
+            Client Details 
+            <button class="btn btn-primary mr-4 mt-2" style="float: right;" onclick="addClient()">New Client</button>
         </h1>
         <div class="card p-2 mt-3">
             <div id="tblDiv" class="card-body">
