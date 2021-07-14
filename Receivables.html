@@ -152,6 +152,36 @@ $resultTable=null;
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">DMS</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="fill.html">Fill</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Receivables</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Clients.html">Client List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">SAC/Services List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">GST Codes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
   <div class="container-fluid mt-3" id="container">
     <div class="row col-12">
       <div class="col-4"></div>
@@ -163,69 +193,11 @@ $resultTable=null;
           <h6>Filter Options</h6>
         </button>
       </div>
-      <hr />
-      <div id="filter" class="border border-2 p-2 m-3" style="display: none">
-        <div class="row col-12 form-group">
-          <h5 class="col-1">Select Firm:</h5>
-          <div class="form-check col-2 form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="firm1"
-              name="firm1"
-              value="1"
-              checked
-            />
-            <label class="form-check-label" for="firm2"
-              >Jinal Waghela & Associates</label
-            >
-          </div>
-          <div class="form-check col-2 form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="firm2"
-              name="firm2"
-              value="2"
-              checked
-            />
-            <label class="form-check-label" for="firm3"
-              >MoneySphere Solutions</label
-            >
-          </div>
-          <div class="form-check col-2 form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="firm3"
-              name="firm3"
-              value="3"
-              checked
-            />
-            <label class="form-check-label" for="firm1"
-              >H Mistry & Associates</label
-            >
-          </div>
-          <div class="col-4 row">
-            <div class="col-3">
-            <h5>Select Client:</h5></div>
-            <div class="col-1"></div>
-            <div class="col-8">
-            <input
-              type="text"
-              id="clientName"
-              name="clientName"
-              class="form-control"
-              aria-label="Default select example"
-              list="cityname"
-              value="All Clients"
-              placeholder="Select Client Name"
-            />
     </div>
-    <hr />
+    <hr>
     <div id="filter" class="border border-2 p-2 m-3" style="display: none">
-      <div class="row col-12 form-group">
-        <h5 class="col-1">Select:</h5>
+        <div class="row col-12 form-group">
+        <h5 class="col-1">Select Firm:</h5>
         <div class="form-check col-2 form-check-inline">
           <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1" />
           <label class="form-check-label" for="firm2">Jinal Waghela & Associates</label>
@@ -238,8 +210,10 @@ $resultTable=null;
           <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3" />
           <label class="form-check-label" for="firm1">H Mistry & Associates</label>
         </div>
-        <div class="col-4">
-          <input type="text" id="clientName" name="clientName" class="form-control" aria-label="Default select example"
+        <div class="col-4 row">
+            <div class="col-3"><h5>Select Client:</h5></div>
+            <div class="col-9">
+            <input type="text" id="clientName" name="clientName" class="form-control" aria-label="Default select example"
             list="cityname" value="All Clients" placeholder="Client Name" />
 
           <datalist id="cityname">
@@ -258,8 +232,8 @@ $resultTable=null;
                 ?>
             </datalist>
             </div>
+            </div>
           </div>
-        </div>
         <div class="row col-12">
             <div class="col-2"><h5 class="text-right">Select Financial Year:</h5></div>
             <div class="col-3">
@@ -344,14 +318,14 @@ $resultTable=null;
             Filter
           </button>
         </center>
-      </div>
-      <br />
-      <center>
-        <button id="filterBtn" name="filter" class="btn btn-success col-auto text-center">
-          Filter
-        </button>
-      </center>
+        </div>
     </div>
+    </br>
+
+
+
+
+
     <div id="tblDiv">
       <table class="
             tbl
