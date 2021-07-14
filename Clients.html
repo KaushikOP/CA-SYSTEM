@@ -1,0 +1,181 @@
+<?php
+    include './connect.php';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- CSS only -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="Bootstrap/css/bootstrap.min.css" />
+    <script src="Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+
+    <title>Client Detials</title>
+
+    <script>
+        function handleEdit(id, action) {
+            if (action == "Edit") {
+                document.getElementById(id + "edit").style.display = "none";
+                document.getElementById(id + "save").style.display = "block";
+                $("#" + id + "name").prop("disabled", false);
+                $("#" + id + "addr").prop("disabled", false);
+                $("#" + id + "mob").prop("disabled", false);
+                $("#" + id + "gst").prop("disabled", false);
+               
+            } else {
+
+                if( $("#" + id + "name").val() == '' || 
+                    $("#" + id + "mob").val() == ''
+                ){
+                    alert("Entries cannot be null except GST and Address");
+                    refreshTable();
+                    return;
+                }
+
+                document.cookie = "cname=" + $("#" + id + "name").val();
+                document.cookie = "addr=" + $("#" + id + "addr").val();
+                document.cookie = "mob=" + $("#" + id + "mob").val();
+                document.cookie = "gst=" + $("#" + id + "gst").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "updateClient.php",
+                    data: {
+                        clientId : id
+                    },
+                    success: function (data) {
+                        alert(data);
+                        refreshTable();
+                    },
+                });
+            }
+
+        }
+        
+        function refreshTable(){
+            $('#tblDiv').load('#tblDiv .tbl');
+        }
+
+        function addClient(){
+            location.replace('newClient.html');
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center bg-success p-2 col-auto" style="border-radius: 10px; color: white;">
+            Client Details 
+            <button class="btn btn-primary mr-4 mt-2" style="float: right;" onclick="addClient()">New Client</button>
+        </h1>
+        <div class="card p-2 mt-3">
+            <div id="tblDiv" class="card-body">
+                <table class="tbl table table-responsive table-striped
+                    zero-configuration
+                    table-bordered" 
+                    style="width: 100%"
+                >
+                    <thead>
+                        <tr>
+                            <th class="text-center">Client ID</th>
+                            <th class="text-center">Client Name</th>
+                            <th class="text-center">Client Address</th>
+                            <th class="text-center">Client Mobile</th>
+                            <th class="text-center">Client GST Number</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $query = "select * from clientlist";
+                            $resultData = mysqli_query($con,$query);
+                            if(mysqli_num_rows($resultData) >0){ 
+                                while($row = mysqli_fetch_assoc($resultData)){ 
+                        ?>
+                        <tr>
+                            <td style="width: 5%;" class="text-center">
+                                <?php echo $row['clientId']; ?>
+                            </td>
+                            <td style="width: 25%;">
+                                <input style="width:100%;" id="<?php echo $row['clientId'].'name'; ?>" type="text" value="<?php echo $row['clientName']; ?>" disabled>
+                            </td>
+                            <td style="width: 30%;">
+                                <textarea style="width:100%;" id="<?php echo $row['clientId'].'addr'; ?>" type="text" disabled rows="3"><?php echo $row['clientAddress']; ?></textarea>
+                            </td>
+                            <td style="width: 15%;" class="text-center">
+                                <input style="width:100%;" id="<?php echo $row['clientId'].'mob'; ?>" type="number" value="<?php echo 0; ?>" maxlength="10" minlength="10" disabled>
+                            </td>
+                            <td style="width: 15%;" class="text-center">
+                               <?php
+                                    if($row['GST']==null){
+                                ?>
+                                        <input type="text" style="width:100%;" id="<?php echo $row['clientId'].'gst'; ?>" value="-" disabled>
+                                <?php        
+                                    }else{
+                                ?>
+                                <input style="width:100%;" type="text" id="<?php echo $row['clientId'].'gst'; ?>" value="<?php echo $row['GST']; ?>" disabled>    
+                                <?php
+                                    }
+                               ?>
+                            </td>   
+                            <td class="text-center" style="width: 10%;">
+                                <div style="display: inline-block">
+                                    <button class="btn btn-primary col-5 mr-1 mb-2" style="float: left; width: 100%;" id="<?php echo $row['clientId'] . 'edit' ?>" 
+                                        onClick="handleEdit('<?php echo $row['clientId']; ?>', 'Edit')">
+                                      &#10000;
+                                    </button>
+                                    <button class="btn btn-primary text-center col-5 mr-1" style="float: left; display: none"
+                                    id="<?php echo $row['clientId'] . 'save' ?>"
+                                      onClick="handleEdit('<?php echo $row['clientId']; ?>', 'Save')"
+                                      class="btn btn-success m-2">
+                                      &#10004;
+                                    </button>
+                                    <button class="btn btn-danger text-center col-5" style="float: right" id="<?php echo $row_count; ?>"
+                                      onClick="refreshTable()" class="btn btn-danger mt-2">
+                                      &#10008;
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php        
+                                }
+                            }   
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
