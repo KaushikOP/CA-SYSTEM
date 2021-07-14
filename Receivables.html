@@ -49,13 +49,18 @@ $resultTable=null;
 
     <script>
         $(document).ready(function(){
-            $("#filterSelect").click(function(){
-                alert("H");
+            $("#filterDiv").click(function(){
+                $("#filter").toggle(1200,"swing");
             });
 
             $("#filterBtn").click(function(){
                 
                 var firm1 = 0,firm2 = 0,firm3 = 0;
+
+                if($("#clientName").val()==""){
+                    alert("Client Name Should not be BLANK. Please fill the client name...");
+                    return;
+                }
 
                 if($("#firm1").prop("checked")){
                     firm1 = $("#firm1").val();
@@ -151,10 +156,15 @@ $resultTable=null;
 
 <body>
     <div class="container-fluid mt-3" id="container">
-        <h1 class="text-center">Receivables</h1>
-        <div id="filter" class="border border-2 p-5 m-5">
+        <div class="row col-12">
+            <div class="col-4"></div>
+            <div class="col-4"><h1 class="text-center">Receivables</h1></div>
+            <div class="col-4"><button id="filterDiv" class="btn btn-primary" width="100%"><h6>Filter Options</h6></button></div>
+        </div>
+        <hr>
+        <div id="filter" class="border border-2 p-2 m-3" style="display:none;">
                 <div class="row col-12 form-group">
-                    <h5 class="col-2">Select Firm:</h5>
+                    <h5 class="col-1">Select:</h5>
                     <div class="form-check col-2 form-check-inline">
                         <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1">
                         <label class="form-check-label" for="firm2">Jinal Waghela & Associates</label>
@@ -167,13 +177,9 @@ $resultTable=null;
                         <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3">
                         <label class="form-check-label" for="firm1">H Mistry & Associates</label>
                     </div>
-                </div>
-                <br>
-                <div class="row col-12">
-                    <h5 class="col-2">Select client:</h5>
                     <div class="col-4">
                     <input type="text" id="clientName" name="clientName" class="form-control" aria-label="Default select example"
-                        list="cityname" value="All Clients">
+                        list="cityname" value="All Clients" placeholder="Client Name">
 
                     <datalist id="cityname">
                         <option data-id="0" selected >All Clients</option>
@@ -194,7 +200,8 @@ $resultTable=null;
                     </datalist>
                     </div>
                 </div>
-                <button id="filterBtn" name="filter" class="btn btn-success col-auto mt-3">Filter</button>
+                <br>
+                <center><button id="filterBtn" name="filter" class="btn btn-success col-auto text-center">Filter</button></center>
         </div>
         <div id="tblDiv">
             <table class="tbl table table-responsive-md table-responsive-sm table-striped table-bordered mt-5" width="100%">
