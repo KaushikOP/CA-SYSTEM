@@ -4,6 +4,8 @@
     
     if(isset($_POST)){
         $cId  = $_POST['clientId'];
+    }else{
+        echo "ERROR!!";
     }
 
     $name = $_COOKIE['cname'];
