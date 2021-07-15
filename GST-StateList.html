@@ -37,40 +37,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
     <!-- JavaScript Bundle with Popper -->
 
-    <title>Client Detials</title>
+    <title>State Code List</title>
 
     <script>
+
         function handleEdit(id, action) {
             if (action == "Edit") {
                 document.getElementById(id + "edit").style.display = "none";
                 document.getElementById(id + "save").style.display = "block";
-                $("#" + id + "name").prop("disabled", false);
-                $("#" + id + "addr").prop("disabled", false);
-                $("#" + id + "mob").prop("disabled", false);
-                $("#" + id + "gst").prop("disabled", false);
+                $("#" + id + "state").prop("disabled", false);
                
             } else {
 
-                if( $("#" + id + "name").val() == '' || 
-                    $("#" + id + "mob").val() == ''
-                ){
-                    alert("Entries cannot be null except GST and Address");
+                if( $("#" + id + "state").val() == '' ){
+                    alert("State Name cannot be null");
                     refreshTable();
                     return;
                 }
 
-                document.cookie = "cname=" + $("#" + id + "name").val();
-                document.cookie = "addr=" + $("#" + id + "addr").val();
-                document.cookie = "mob=" + $("#" + id + "mob").val();
-                document.cookie = "gst=" + $("#" + id + "gst").val();
-
                 $.ajax({
                     type: "POST",
-                    url: "updateClient.php",
+                    url: "updateStateCode.php",
                     data: {
-                        clientId : id
+                        state_code : id,
+                        state_name:$("#" + id + "state").val()
                     },
                     success: function (data) {
                         alert(data);
@@ -85,15 +78,15 @@
             $('#tblDiv').load('#tblDiv .tbl');
         }
 
-        function addClient(){
-            location.replace('newClient.html');
+        function addService(){
+            location.replace('newService.html');
         }
 
     </script>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container ">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
             <div class="container-fluid">
@@ -111,13 +104,13 @@
                             <a class="nav-link" aria-current="page" href="Receivables.html">Receivables</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="Clients.html">Client List</a>
+                            <a class="nav-link" href="Clients.html">Client List</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="services.html">SAC/Services List</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="GST-StateList.html">GST Codes</a>
+                            <a class="nav-link active" href="GST-StateList.html">GST Codes</a>
                         </li>
                     </ul>
                 </div>
@@ -127,72 +120,51 @@
 
 
         <h1 class="mt-5 text-center bg-success p-2 col-auto" style="border-radius: 10px; color: white;">
-            Client Details 
-            <button class="btn btn-primary mr-4 mt-2" style="float: right;" onclick="addClient()">New Client</button>
+            GST State Codes
         </h1>
-        <div class="card p-2 mt-3">
+        <div class="text-center card p-2 mt-3" style="width: 80%;">
             <div id="tblDiv" class="card-body">
-                <table class="tbl table table-responsive table-striped
+                <table id="serviceTable" class="tbl table table-responsive table-striped
                     zero-configuration
                     table-bordered" 
                     style="width: 100%"
                 >
                     <thead>
                         <tr>
-                            <th class="text-center">Client ID</th>
-                            <th class="text-center">Client Name</th>
-                            <th class="text-center">Client Address</th>
-                            <th class="text-center">Client Mobile</th>
-                            <th class="text-center">Client GST Number</th>
+                            <th class="text-center">State Code</th>
+                            <th class="text-center">State Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $query = "select * from clientlist";
+                            $query = "select * from gst_state_code_list";
                             $resultData = mysqli_query($con,$query);
                             if(mysqli_num_rows($resultData) >0){ 
                                 while($row = mysqli_fetch_assoc($resultData)){ 
                         ?>
                         <tr>
                             <td style="width: 5%;" class="text-center">
-                                <?php echo $row['clientId']; ?>
+                                <?php echo $row['state_code']; ?>
                             </td>
+                        
                             <td style="width: 25%;">
-                                <input style="width:100%;" id="<?php echo $row['clientId'].'name'; ?>" type="text" value="<?php echo $row['clientName']; ?>" disabled>
+                                <input style="width:100%;" id="<?php echo $row['state_code'].'state'; ?>" type="text" value="<?php echo $row['state_name']; ?>" disabled>
                             </td>
-                            <td style="width: 30%;">
-                                <textarea style="width:100%;" id="<?php echo $row['clientId'].'addr'; ?>" type="text" disabled rows="3"><?php echo $row['clientAddress']; ?></textarea>
-                            </td>
-                            <td style="width: 15%;" class="text-center">
-                                <input style="width:100%;" id="<?php echo $row['clientId'].'mob'; ?>" type="number" value="<?php echo 0; ?>" maxlength="10" minlength="10" disabled>
-                            </td>
-                            <td style="width: 15%;" class="text-center">
-                               <?php
-                                    if($row['GST']==null){
-                                ?>
-                                        <input type="text" style="width:100%;" id="<?php echo $row['clientId'].'gst'; ?>" value="-" disabled>
-                                <?php        
-                                    }else{
-                                ?>
-                                <input style="width:100%;" type="text" id="<?php echo $row['clientId'].'gst'; ?>" value="<?php echo $row['GST']; ?>" disabled>    
-                                <?php
-                                    }
-                               ?>
-                            </td>   
+                            
                             <td class="text-center" style="width: 10%;">
                                 <div style="display: inline-block">
-                                    <button class="btn btn-primary col-5 mr-1 mb-2" style="float: left; width: 100%;" id="<?php echo $row['clientId'] . 'edit' ?>" 
-                                        onClick="handleEdit('<?php echo $row['clientId']; ?>', 'Edit')">
+                                    <button class="btn btn-primary col-5 mr-1 mb-2" style="float: left; width: 100%;" id="<?php echo $row['state_code'] . 'edit' ?>" 
+                                        onClick="handleEdit('<?php echo $row['state_code']; ?>', 'Edit')">
                                       &#10000;
                                     </button>
                                     <button class="btn btn-primary text-center col-5 mr-1" style="float: left; display: none"
-                                    id="<?php echo $row['clientId'] . 'save' ?>"
-                                      onClick="handleEdit('<?php echo $row['clientId']; ?>', 'Save')"
+                                    id="<?php echo $row['state_code'] . 'save' ?>"
+                                      onClick="handleEdit('<?php echo $row['state_code']; ?>', 'Save')"
                                       class="btn btn-success m-2">
                                       &#10004;
                                     </button>
-                                    <button class="btn btn-danger text-center col-5" style="float: right" id="<?php echo $row_count; ?>"
+                                    <button class="btn btn-danger text-center col-5" style="float: right" id="<?php echo $row['state_code']; ?>"
                                       onClick="refreshTable()" class="btn btn-danger mt-2">
                                       &#10008;
                                     </button>
