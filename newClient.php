@@ -14,7 +14,7 @@
             return;
         }
 
-        $query = "insert into clientlist values(NULL,'".$name."','".$GST."','".$address."')";
+        $query = "insert into clientlist values(NULL,'".$name."','".$GST."','".$address."','".$mobile."')";
         $result = mysqli_query($con,$query);
 
         if($result){

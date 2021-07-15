@@ -17,7 +17,7 @@
         $gst = null;
     }
 
-    $query = "update clientlist set clientName='".$name."', GST='".$gst."', clientAddress='".$addr."' where clientId=".$cId;
+    $query = "update clientlist set clientName='".$name."', GST='".$gst."', clientAddress='".$addr."', mobile_no='".$mob."' where clientId=".$cId;
     $result = mysqli_query($con,$query);
 
     if($result){
