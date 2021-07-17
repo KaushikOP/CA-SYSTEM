@@ -3,11 +3,11 @@
 
     if(isset($_POST)){
 
-        $clientIdStr=" and cl.clientId=".$_POST['clientId'];
-        $fiscalYearStr="and bm.invoice_no LIKE '".$_POST['fiscalYear']."%'";
+        $clientIdStr=" and cl.clientId=".$_POST['clientId']." ";
+        $fiscalYearStr="and bm.invoice_no LIKE '".$_POST['fiscalYear']."%'"." ";
         
         if($_POST['clientId'] == 0){
-            $clientIdStr=" and cl.clientId>0";
+            $clientIdStr=" and cl.clientId>0 ";
         }
 
         if($_POST['fiscalYear'] == 0){

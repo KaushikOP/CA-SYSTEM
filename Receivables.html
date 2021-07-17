@@ -120,6 +120,7 @@ $resultTable=null;
           },
           success: function (result) {
             if (result) {
+              //console.log(result);
               document.cookie = "queryString=" + result;
               refreshDivs();
             }

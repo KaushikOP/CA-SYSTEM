@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 05:08 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- Generation Time: Jul 17, 2021 at 06:37 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -192,8 +193,8 @@ INSERT INTO `gst_state_code_list` (`state_code`, `state_name`) VALUES
 
 CREATE TABLE `services` (
   `serviceId` int(11) NOT NULL,
-  `serviceName` longtext DEFAULT NULL,
-  `serviceDescription` longtext NOT NULL,
+  `serviceDescription` longtext DEFAULT NULL,
+  `serviceName` longtext NOT NULL,
   `SAC` int(11) NOT NULL,
   `firmNameId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -202,7 +203,7 @@ CREATE TABLE `services` (
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`serviceId`, `serviceName`, `serviceDescription`, `SAC`, `firmNameId`) VALUES
+INSERT INTO `services` (`serviceId`, `serviceDescription`, `serviceName`, `SAC`, `firmNameId`) VALUES
 (1, 'Legal advisory and representation services concerning other fields of law', 'Legal advisory', 998212, 3),
 (2, 'Legal documentation and certification services concerning other documents\r\n', 'Certification Fees\r\n', 998214, 3),
 (3, 'Other legal services\r\n', 'Other legal services\r\n', 998216, 3),
