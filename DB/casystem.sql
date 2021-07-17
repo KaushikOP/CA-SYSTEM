@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2021 at 12:23 PM
+-- Generation Time: Jul 15, 2021 at 05:08 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -41,13 +41,17 @@ CREATE TABLE `bill_details` (
 --
 
 INSERT INTO `bill_details` (`bill_details_id`, `bill_master_id`, `firm_id`, `service_id`, `taxable_amount`, `tax_amount`) VALUES
-(1, '0', 3, 4, 1000, 1180),
-(2, '0', 3, 1, 2000, 2360),
-(3, '1', 3, 4, 2000, 2360),
-(4, '1', 3, 1, 3029, 3574.22),
-(5, '1', 3, 2, 450, 531),
-(6, '0', 1, 9, 1000, 0),
-(7, '0', 1, 10, 2000, 0);
+(1, '2021-22/0', 3, 4, 1000, 1180),
+(2, '2021-22/0', 3, 1, 2000, 2360),
+(3, '2021-22/1', 3, 4, 2000, 2360),
+(4, '2021-22/1', 3, 1, 3029, 3574.22),
+(5, '2021-22/1', 3, 2, 450, 531),
+(6, '2021-22/0', 1, 9, 1000, 0),
+(7, '2021-22/0', 1, 10, 2000, 0),
+(8, '2021-22/1', 1, 10, 1000, 0),
+(9, '2021-22/1', 1, 8, 2092, 0),
+(10, '2021-22/2', 3, 5, 1209, 1426.62),
+(11, '2021-22/2', 3, 2, 3448, 4068.64);
 
 -- --------------------------------------------------------
 
@@ -75,9 +79,11 @@ CREATE TABLE `bill_master` (
 --
 
 INSERT INTO `bill_master` (`invoice_no`, `firm_id`, `invoice_date`, `client_id`, `total_amount`, `amount_received`, `receipt_date`, `payment_mode`, `cheque_no`, `amount_pending`, `tds`, `state_code`) VALUES
-('0', 1, '2021-07-01', 3, 3000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
-('0', 3, '2021-07-02', 1, 3540, 0, '0000-00-00', '0', '0', '0', 0, 27),
-('1', 3, '2021-04-09', 4, 6465.22, 0, '0000-00-00', '0', '0', '0', 0, 24);
+('2021-22/0', 1, '2021-07-01', 3, 3000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2021-22/0', 3, '2021-07-02', 1, 3540, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2021-22/1', 1, '2021-07-01', 1, 3092, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2021-22/1', 3, '2021-04-09', 4, 6465.22, 0, '0000-00-00', '0', '0', '0', 0, 24),
+('2021-22/2', 3, '2021-03-16', 4, 5495.26, 0, '0000-00-00', '0', '0', '0', 0, 24);
 
 -- --------------------------------------------------------
 
@@ -89,18 +95,19 @@ CREATE TABLE `clientlist` (
   `clientId` int(11) NOT NULL,
   `clientName` text NOT NULL,
   `GST` varchar(15) NOT NULL,
-  `clientAddress` longtext DEFAULT NULL
+  `clientAddress` longtext DEFAULT NULL,
+  `mobile_no` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `clientlist`
 --
 
-INSERT INTO `clientlist` (`clientId`, `clientName`, `GST`, `clientAddress`) VALUES
-(1, 'REAL LAMINATES\r\n\r\n', '27AAFFR1902F1ZJ', 'Plot No. 13, New Timber Market, Bhawani Peth, Pune 411 002.\r\n'),
-(2, 'B. U. BHANDARI VAASTU\r\n', '27AAHFB1197Q1ZV', ''),
-(3, 'B. U. BHANDARI ERANDWANA (AOP)\r\n', '27AACAB9561G1ZN', ''),
-(4, 'SANKET IMPEX\r\n', '27AOIPB9142E1Z4', '1ST FLOOR, SAMRAT HOUSE, 39 - D, 2/6, SHANKARSETH ROAD PUNE - 411037\r\n');
+INSERT INTO `clientlist` (`clientId`, `clientName`, `GST`, `clientAddress`, `mobile_no`) VALUES
+(1, 'REAL LAMINATES', '27AAFFR1902F1ZJ', 'Plot No. 13, New Timber Market, Bhawani Peth, Pune 411 002.', '1234567795'),
+(2, 'B. U. BHANDARI VAASTU', '27AAHFB1197Q1ZV', 'Gandhinagar', ''),
+(3, 'B. U. BHANDARI ERANDWANA (AOP)', '27AACAB9561G1ZN', '', '9876543211'),
+(4, 'SANKET IMPEX\r\n', '27AOIPB9142E1Z4', '1ST FLOOR, SAMRAT HOUSE, 39 - D, 2/6, SHANKARSETH ROAD PUNE - 411037\r\n', '');
 
 -- --------------------------------------------------------
 
@@ -110,17 +117,18 @@ INSERT INTO `clientlist` (`clientId`, `clientName`, `GST`, `clientAddress`) VALU
 
 CREATE TABLE `firmname` (
   `firmNameId` int(11) NOT NULL,
-  `name` text NOT NULL
+  `name` text NOT NULL,
+  `shortForm` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `firmname`
 --
 
-INSERT INTO `firmname` (`firmNameId`, `name`) VALUES
-(1, 'jinal Waghela & Associates'),
-(2, 'MoneySphere Solutions'),
-(3, 'H. Mistry & Associates');
+INSERT INTO `firmname` (`firmNameId`, `name`, `shortForm`) VALUES
+(1, 'jinal Waghela & Associates', 'JWA'),
+(2, 'MoneySphere Solutions', 'MSP'),
+(3, 'H. Mistry & Associates', 'HMA');
 
 -- --------------------------------------------------------
 
@@ -195,16 +203,17 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`serviceId`, `serviceName`, `serviceDescription`, `SAC`, `firmNameId`) VALUES
-(1, 'Legal advisory and representation services concerning other fields of law\r\n', 'Legal advisory\r\n', 998212, 3),
+(1, 'Legal advisory and representation services concerning other fields of law', 'Legal advisory', 998212, 3),
 (2, 'Legal documentation and certification services concerning other documents\r\n', 'Certification Fees\r\n', 998214, 3),
 (3, 'Other legal services\r\n', 'Other legal services\r\n', 998216, 3),
 (4, 'Financial auditing services\r\n', 'Audit Fees\r\n', 998221, 3),
 (5, 'Accounting and bookkeeping service\r\n', 'Accounting and Bookkeeping\r\n', 998222, 3),
-(6, '', 'Audit Fees', 0, 1),
+(6, 'Audit Fees for JWA', 'Audit Fees', 234, 1),
 (7, '', 'E - TDS RETURN FILING FEES\r\n', 0, 1),
 (8, '', 'INCOME TAX RETURN FILING FEES\r\n', 0, 1),
 (9, '', 'ACCOUNTING/BOOK KEEPING FEES\r\n', 0, 1),
-(10, '', 'GST RETURN FILING FEES\r\n', 0, 1);
+(10, '', 'GST RETURN FILING FEES\r\n', 0, 1),
+(11, 'Test Service', 'This is a test service', 123456, 2);
 
 --
 -- Indexes for dumped tables
@@ -261,13 +270,13 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `bill_details`
 --
 ALTER TABLE `bill_details`
-  MODIFY `bill_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `bill_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `clientlist`
 --
 ALTER TABLE `clientlist`
-  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `firmname`
@@ -285,7 +294,7 @@ ALTER TABLE `gst_state_code_list`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `serviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `serviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

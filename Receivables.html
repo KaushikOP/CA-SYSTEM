@@ -47,6 +47,23 @@ $resultTable=null;
 
   <script>
     $(document).ready(function () {
+
+
+      $("#fYear").val(getFinancialYear());
+
+      
+      function getFinancialYear(){
+        var fiscalyear = "";
+        var today = new Date();
+        if ((today.getMonth() + 1) <= 3) {
+          fiscalyear = (today.getFullYear() - 1) + "-" + (''+today.getFullYear()).substr(2);
+        } else {
+          fiscalyear = today.getFullYear() + "-" + (''+(today.getFullYear() + 1)).substr(2);
+        }
+        return fiscalyear;
+      }
+
+
       $("#filterDiv").click(function () {
         $("#filter").toggle(1200, "swing");
       });
@@ -60,6 +77,12 @@ $resultTable=null;
           alert(
             "Client Name Should not be BLANK. Please fill the client name..."
           );
+          return;
+        }
+
+        if($("#fYear").val().length<7){
+          alert("Please select proper Fiscal Year...");
+          $("#fYear").val(getFinancialYear());
           return;
         }
 
@@ -79,6 +102,12 @@ $resultTable=null;
           })
           .data("id");
 
+          var fiscalYear = $("#fYear").val();
+          if(fiscalYear == "All Years"){
+            fiscalYear = 0;
+          }
+
+
         $.ajax({
           url: "filterReceivables.php", // your php file
           type: "POST", // type of the HTTP request
@@ -87,6 +116,7 @@ $resultTable=null;
             firm2: firm2,
             firm3: firm3,
             clientId: clientId,
+            fiscalYear: fiscalYear,
           },
           success: function (result) {
             if (result) {
@@ -199,15 +229,15 @@ $resultTable=null;
       <div class="row col-12 form-group">
         <h5 class="col-1">Select Firm:</h5>
         <div class="form-check col-2 form-check-inline">
-          <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1" />
+          <input class="form-check-input" type="checkbox" id="firm1" name="firm1" value="1" checked/>
           <label class="form-check-label" for="firm2">Jinal Waghela & Associates</label>
         </div>
         <div class="form-check col-2 form-check-inline">
-          <input class="form-check-input" type="checkbox" id="firm2" name="firm2" value="2" />
+          <input class="form-check-input" type="checkbox" id="firm2" name="firm2" value="2" checked/>
           <label class="form-check-label" for="firm3">MoneySphere Solutions</label>
         </div>
         <div class="form-check col-2 form-check-inline">
-          <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3" />
+          <input class="form-check-input" type="checkbox" id="firm3" name="firm3" value="3" checked/>
           <label class="form-check-label" for="firm1">H Mistry & Associates</label>
         </div>
         <div class="col-4 row">
@@ -245,46 +275,47 @@ $resultTable=null;
             list="fYearList" placeholder="Select Financial Year" />
 
           <datalist id="fYearList">
-            <option data-id="1" selected>2000-01</option>
-            <option data-id="2" selected>2001-02</option>
-            <option data-id="3" selected>2002-03</option>
-            <option data-id="4" selected>2003-04</option>
-            <option data-id="5" selected>2004-05</option>
-            <option data-id="6" selected>2005-06</option>
-            <option data-id="7" selected>2006-07</option>
-            <option data-id="8" selected>2007-08</option>
-            <option data-id="9" selected>2008-09</option>
-            <option data-id="10" selected>2009-10</option>
-            <option data-id="11" selected>2010-11</option>
-            <option data-id="12" selected>2011-12</option>
-            <option data-id="13" selected>2012-13</option>
-            <option data-id="14" selected>2013-14</option>
-            <option data-id="15" selected>2014-15</option>
-            <option data-id="16" selected>2015-16</option>
-            <option data-id="17" selected>2016-17</option>
-            <option data-id="18" selected>2017-18</option>
-            <option data-id="19" selected>2018-19</option>
-            <option data-id="20" selected>2019-20</option>
-            <option data-id="21" selected>2020-21</option>
-            <option data-id="22" selected>2021-22</option>
-            <option data-id="23" selected>2022-23</option>
-            <option data-id="24" selected>2023-24</option>
-            <option data-id="25" selected>2024-25</option>
-            <option data-id="26" selected>2026-27</option>
-            <option data-id="27" selected>2027-28</option>
-            <option data-id="28" selected>2028-29</option>
-            <option data-id="29" selected>2029-30</option>
-            <option data-id="30" selected>2030-31</option>
-            <option data-id="31" selected>2031-32</option>
-            <option data-id="32" selected>2032-33</option>
-            <option data-id="33" selected>2033-34</option>
-            <option data-id="34" selected>2034-35</option>
-            <option data-id="35" selected>2035-36</option>
-            <option data-id="36" selected>2036-37</option>
-            <option data-id="37" selected>2037-38</option>
-            <option data-id="38" selected>2038-39</option>
-            <option data-id="39" selected>2039-40</option>
-            <option data-id="40" selected>2040-41</option>
+            <option data-id="0" >All Years</option>
+            <option data-id="1" >2000-01</option>
+            <option data-id="2" >2001-02</option>
+            <option data-id="3" >2002-03</option>
+            <option data-id="4" >2003-04</option>
+            <option data-id="5" >2004-05</option>
+            <option data-id="6" >2005-06</option>
+            <option data-id="7" >2006-07</option>
+            <option data-id="8" >2007-08</option>
+            <option data-id="9" >2008-09</option>
+            <option data-id="10" >2009-10</option>
+            <option data-id="11" >2010-11</option>
+            <option data-id="12" >2011-12</option>
+            <option data-id="13" >2012-13</option>
+            <option data-id="14" >2013-14</option>
+            <option data-id="15" >2014-15</option>
+            <option data-id="16" >2015-16</option>
+            <option data-id="17" >2016-17</option>
+            <option data-id="18" >2017-18</option>
+            <option data-id="19" >2018-19</option>
+            <option data-id="20" >2019-20</option>
+            <option data-id="21" >2020-21</option>
+            <option data-id="22" >2021-22</option>
+            <option data-id="23" >2022-23</option>
+            <option data-id="24" >2023-24</option>
+            <option data-id="25" >2024-25</option>
+            <option data-id="26" >2026-27</option>
+            <option data-id="27" >2027-28</option>
+            <option data-id="28" >2028-29</option>
+            <option data-id="29" >2029-30</option>
+            <option data-id="30" >2030-31</option>
+            <option data-id="31" >2031-32</option>
+            <option data-id="32" >2032-33</option>
+            <option data-id="33" >2033-34</option>
+            <option data-id="34" >2034-35</option>
+            <option data-id="35" >2035-36</option>
+            <option data-id="36" >2036-37</option>
+            <option data-id="37" >2037-38</option>
+            <option data-id="38" >2038-39</option>
+            <option data-id="39" >2039-40</option>
+            <option data-id="40" >2040-41</option>
           </datalist>
         </div>
         <div class="col-2 text-right">
@@ -292,10 +323,10 @@ $resultTable=null;
         </div>
         <div class="col-3">
           <input type="text" id="clientGrp" name="clientGrp" class="form-control" aria-label="Default select example"
-            list="clientGrpList" placeholder="Select Client Group" />
+            list="clientGrpList" placeholder="Select Client Group: Coming Soon..." />
 
           <datalist id="clientGrpList">
-            <option data-id="0" selected>Client Groups</option>
+            <option data-id="0" selected>Coming Soon...</option>
           </datalist>
         </div>
         <div class="col-2"></div>
