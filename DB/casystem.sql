@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2021 at 06:37 PM
+-- Generation Time: Jul 17, 2021 at 07:33 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -209,12 +209,31 @@ INSERT INTO `services` (`serviceId`, `serviceDescription`, `serviceName`, `SAC`,
 (3, 'Other legal services\r\n', 'Other legal services\r\n', 998216, 3),
 (4, 'Financial auditing services\r\n', 'Audit Fees\r\n', 998221, 3),
 (5, 'Accounting and bookkeeping service\r\n', 'Accounting and Bookkeeping\r\n', 998222, 3),
-(6, 'Audit Fees for JWA', 'Audit Fees', 234, 1),
+(6, 'Audit Fees', 'Audit Fees for JWA', 234, 1),
 (7, '', 'E - TDS RETURN FILING FEES\r\n', 0, 1),
 (8, '', 'INCOME TAX RETURN FILING FEES\r\n', 0, 1),
 (9, '', 'ACCOUNTING/BOOK KEEPING FEES\r\n', 0, 1),
 (10, '', 'GST RETURN FILING FEES\r\n', 0, 1),
 (11, 'Test Service', 'This is a test service', 123456, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `userId` text NOT NULL,
+  `password` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `userId`, `password`) VALUES
+(1, 'casystem', '3f427a1759d4f648a714065d7e250e99');
 
 --
 -- Indexes for dumped tables
@@ -264,6 +283,12 @@ ALTER TABLE `services`
   ADD KEY `firmnameForeignkey` (`firmNameId`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -296,6 +321,12 @@ ALTER TABLE `gst_state_code_list`
 --
 ALTER TABLE `services`
   MODIFY `serviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
