@@ -143,8 +143,8 @@
                     <thead>
                         <tr>
                             <th class="text-center">Service ID</th>
-                            <th class="text-center">Service Name</th>
                             <th class="text-center">Service Description</th>
+                            <th class="text-center">Service Name</th>
                             <th class="text-center">SAC</th>
                             <th class="text-center">Provider Firm Name</th>
                             <th>Action</th>
@@ -162,10 +162,10 @@
                                 <?php echo $row['serviceId']; ?>
                             </td>
                             <td style="width: 30%;">
-                                <textarea style="width:100%;" id="<?php echo $row['serviceId'].'name'; ?>" type="text" disabled rows="2"><?php echo $row['serviceName']; ?></textarea>
+                                <textarea style="width:100%;" id="<?php echo $row['serviceId'].'name'; ?>" type="text" disabled rows="2"><?php echo $row['serviceDescription']; ?></textarea>
                             </td>
                             <td style="width: 25%;">
-                                <input style="width:100%;" id="<?php echo $row['serviceId'].'desc'; ?>" type="text" value="<?php echo $row['serviceDescription']; ?>" disabled>
+                                <input style="width:100%;" id="<?php echo $row['serviceId'].'desc'; ?>" type="text" value="<?php echo $row['serviceName']; ?>" disabled>
                             </td>
                             <td style="width: 15%;" class="text-center">
                                 <input style="width:100%;" id="<?php echo $row['serviceId'].'sac'; ?>" type="text" value="<?php echo $row['SAC']; ?>" disabled>
