@@ -126,19 +126,71 @@
         <h3 id="firmName" class="text-center text-primary"></h3>
 
         <form id="GSTForm" class="border border-dark" action="insertInvoiceData.php" method="POST">
-
-            <div class="m-3">
-                <div class="col-auto">
-                    <b><label for="invoiceNumber" class="col-form-label">Invoice Number: </label></b>
-                </div>
-                <div class="col-auto">
-                    <input type="text" name="invoiceNumber" id="invoiceNumber" class="form-control"
-                        aria-describedby="invoiceNumberHelpInline" readonly>
-                </div>
-                <div class="col-auto">
-                    <span id="invoiceNumberHelpInline" class="form-text">
-                        Must be 8-20 characters long.
-                    </span>
+            <div class="row m-3 col-12">
+                <div class="col-6">
+                    <div class="col-auto">
+                        <b><label for="fYearGST" class="col-form-label">Select Financial Year: </label></b>
+                    </div>
+                    <input type="text" id="fYearGST" class="form-control" aria-label="Default select example"
+                      list="fYearListGST" placeholder="2021-22" />
+          
+                    <datalist id="fYearListGST">
+                      <option data-id="0" >All Years</option>
+                      <option data-id="1" >2000-01</option>
+                      <option data-id="2" >2001-02</option>
+                      <option data-id="3" >2002-03</option>
+                      <option data-id="4" >2003-04</option>
+                      <option data-id="5" >2004-05</option>
+                      <option data-id="6" >2005-06</option>
+                      <option data-id="7" >2006-07</option>
+                      <option data-id="8" >2007-08</option>
+                      <option data-id="9" >2008-09</option>
+                      <option data-id="10" >2009-10</option>
+                      <option data-id="11" >2010-11</option>
+                      <option data-id="12" >2011-12</option>
+                      <option data-id="13" >2012-13</option>
+                      <option data-id="14" >2013-14</option>
+                      <option data-id="15" >2014-15</option>
+                      <option data-id="16" >2015-16</option>
+                      <option data-id="17" >2016-17</option>
+                      <option data-id="18" >2017-18</option>
+                      <option data-id="19" >2018-19</option>
+                      <option data-id="20" >2019-20</option>
+                      <option data-id="21" >2020-21</option>
+                      <option data-id="22" >2021-22</option>
+                      <option data-id="23" >2022-23</option>
+                      <option data-id="24" >2023-24</option>
+                      <option data-id="25" >2024-25</option>
+                      <option data-id="26" >2026-27</option>
+                      <option data-id="27" >2027-28</option>
+                      <option data-id="28" >2028-29</option>
+                      <option data-id="29" >2029-30</option>
+                      <option data-id="30" >2030-31</option>
+                      <option data-id="31" >2031-32</option>
+                      <option data-id="32" >2032-33</option>
+                      <option data-id="33" >2033-34</option>
+                      <option data-id="34" >2034-35</option>
+                      <option data-id="35" >2035-36</option>
+                      <option data-id="36" >2036-37</option>
+                      <option data-id="37" >2037-38</option>
+                      <option data-id="38" >2038-39</option>
+                      <option data-id="39" >2039-40</option>
+                      <option data-id="40" >2040-41</option>
+                    </datalist>
+                  </div>
+                <div class="col-6">
+                    <div class="col-auto">
+                        <b><label for="invoiceNumber" class="col-form-label">Invoice Number: </label></b>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="invoiceNumber" id="invoiceNumber" class="form-control"
+                            aria-describedby="invoiceNumberHelpInline" readonly>
+                    </div>
+                    <div class="col-auto">
+                        <span id="invoiceNumberHelpInline" class="form-text">
+                            Must be 8-20 characters long.
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -304,20 +356,74 @@
 
         <form id="NGSTForm" action="insertInvoiceData.php" class="border border-dark" method="POST">
 
-            <div class="m-3">
-                <div class="col-auto">
-                    <b><label for="NinvoiceNumber" class="col-form-label">Invoice Number: </label></b>
-                </div>
-                <div class="col-auto">
-                    <input type="text" name="NinvoiceNumber" id="NinvoiceNumber" class="form-control"
-                        aria-describedby="NinvoiceNumberHelpInline" readonly>
-                </div>
-                <div class="col-auto">
-                    <span id="NinvoiceNumberHelpInline" class="form-text">
-                        Must be 8-20 characters long.
-                    </span>
+            <div class="row m-3 col-12">
+                <div class="col-6">
+                    <div class="col-auto">
+                        <b><label for="fYear" class="col-form-label">Select Financial Year: </label></b>
+                    </div>
+                    <input type="text" id="fYear" class="form-control" aria-label="Default select example"
+                      list="fYearList" placeholder="2021-22" />
+          
+                    <datalist id="fYearList">
+                      <option data-id="0" >All Years</option>
+                      <option data-id="1" >2000-01</option>
+                      <option data-id="2" >2001-02</option>
+                      <option data-id="3" >2002-03</option>
+                      <option data-id="4" >2003-04</option>
+                      <option data-id="5" >2004-05</option>
+                      <option data-id="6" >2005-06</option>
+                      <option data-id="7" >2006-07</option>
+                      <option data-id="8" >2007-08</option>
+                      <option data-id="9" >2008-09</option>
+                      <option data-id="10" >2009-10</option>
+                      <option data-id="11" >2010-11</option>
+                      <option data-id="12" >2011-12</option>
+                      <option data-id="13" >2012-13</option>
+                      <option data-id="14" >2013-14</option>
+                      <option data-id="15" >2014-15</option>
+                      <option data-id="16" >2015-16</option>
+                      <option data-id="17" >2016-17</option>
+                      <option data-id="18" >2017-18</option>
+                      <option data-id="19" >2018-19</option>
+                      <option data-id="20" >2019-20</option>
+                      <option data-id="21" >2020-21</option>
+                      <option data-id="22" >2021-22</option>
+                      <option data-id="23" >2022-23</option>
+                      <option data-id="24" >2023-24</option>
+                      <option data-id="25" >2024-25</option>
+                      <option data-id="26" >2026-27</option>
+                      <option data-id="27" >2027-28</option>
+                      <option data-id="28" >2028-29</option>
+                      <option data-id="29" >2029-30</option>
+                      <option data-id="30" >2030-31</option>
+                      <option data-id="31" >2031-32</option>
+                      <option data-id="32" >2032-33</option>
+                      <option data-id="33" >2033-34</option>
+                      <option data-id="34" >2034-35</option>
+                      <option data-id="35" >2035-36</option>
+                      <option data-id="36" >2036-37</option>
+                      <option data-id="37" >2037-38</option>
+                      <option data-id="38" >2038-39</option>
+                      <option data-id="39" >2039-40</option>
+                      <option data-id="40" >2040-41</option>
+                    </datalist>
+                  </div>
+                  <div class="col-6">
+                    <div class="col-auto">
+                        <b><label for="NinvoiceNumber" class="col-form-label">Invoice Number: </label></b>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" name="NinvoiceNumber" id="NinvoiceNumber" class="form-control"
+                            aria-describedby="NinvoiceNumberHelpInline" readonly>
+                    </div>
+                    <div class="col-auto">
+                        <span id="NinvoiceNumberHelpInline" class="form-text">
+                            Must be 8-20 characters long.
+                        </span>
+                    </div>
                 </div>
             </div>
+            
 
 
             <div class="m-3">
