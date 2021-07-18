@@ -35,7 +35,7 @@ $(document).ready(function() {
             type: 'POST', // type of the HTTP request
             data: { "id": id },
             success: function(result) {
-                if(result){
+                if (result) {
                     obj = JSON.parse(result);
                     $("#clientAddr").val(obj[0]);
                     $("#clientGST").val(obj[1]);
@@ -61,7 +61,7 @@ $(document).ready(function() {
             type: 'POST', // type of the HTTP request
             data: { "id": id },
             success: function(result) {
-                if(result){
+                if (result) {
                     var obj = JSON.parse(result);
                     $("#NclientAddr").val(obj[0]);
                     $("#NclientGST").val(obj[1]);
@@ -79,7 +79,7 @@ $(document).ready(function() {
             return this.value == pName;
         }).data('id');
 
-        $("#selectGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterGST + "' value='" + $("#perticularGSTName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterGST + "' value='"+id+"'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterGST + "'  onclick='removeGSTDivision(" + counterGST + ")' >Remove</button></div>");
+        $("#selectGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterGST + "' value='" + $("#perticularGSTName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterGST + "' value='" + id + "'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterGST + "'  onclick='removeGSTDivision(" + counterGST + ")' >Remove</button></div>");
 
         $("#perticularGSTName").val("");
         counterGST++;
@@ -92,7 +92,7 @@ $(document).ready(function() {
             return this.value == pName;
         }).data('id');
 
-        $("#selectNGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterNGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterNGST + "' value='" + $("#NGSTPerticularName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterNGST + "' value='"+id+"'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterNGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterNGST + "'  onclick='removeNGSTDivision(" + counterNGST + ")' >Remove</button></div>");
+        $("#selectNGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterNGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterNGST + "' value='" + $("#NGSTPerticularName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterNGST + "' value='" + id + "'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterNGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterNGST + "'  onclick='removeNGSTDivision(" + counterNGST + ")' >Remove</button></div>");
         $("#NGSTPerticularName").val("");
         counterNGST++;
     });
@@ -102,9 +102,9 @@ $(document).ready(function() {
         var firmId = $('#firm').val();
         $.ajax({
             method: 'GET',
-            url: "getInvoiceNo.php", 
-            data: 'firmId='+firmId,
-            success: function(result){
+            url: "getInvoiceNo.php",
+            data: 'firmId=' + firmId,
+            success: function(result) {
                 $('#invoiceNumber').val(result);
                 $('#NinvoiceNumber').val(result);
             }
