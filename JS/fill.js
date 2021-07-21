@@ -84,7 +84,7 @@ $(document).ready(function() {
             return this.value == pName;
         }).data('id');
 
-        $("#selectGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterGST + "' value='" + $("#perticularGSTName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterGST + "' value='" + id + "'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterGST + "'  onclick='removeGSTDivision(" + counterGST + ")' >Remove</button></div>");
+        $("#selectGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterGST + "' ><input type='text' class='col-5 form-control mr-2' name='PerticularNo" + counterGST + "' value='" + $("#perticularGSTName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterGST + "' value='" + id + "'><input type='text' class='form-control col-3 mr-2' name='PerticularNote" + counterGST + "'placeholder='Note'><input type='number' class='form-control col-2 mr-2' name='PerticularAmt" + counterGST + "' required placeholder='Taxable Amount'><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterGST + "'  onclick='removeGSTDivision(" + counterGST + ")' >Remove</button></div>");
 
         $("#perticularGSTName").val("");
         counterGST++;
@@ -97,7 +97,7 @@ $(document).ready(function() {
             return this.value == pName;
         }).data('id');
 
-        $("#selectNGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterNGST + "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" + counterNGST + "' value='" + $("#NGSTPerticularName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterNGST + "' value='" + id + "'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" + counterNGST + "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterNGST + "'  onclick='removeNGSTDivision(" + counterNGST + ")' >Remove</button></div>");
+        $("#selectNGSTParticular").before("<div class='m-3 col-auto row' id='divPerticularNo" + counterNGST + "' ><input type='text' class='col-5 form-control mr-2' name='PerticularNo" + counterNGST + "' value='" + $("#NGSTPerticularName").val() + "'readonly><input type='hidden' name='PerticularNo" + counterNGST + "' value='" + id + "'><input type='text' class='form-control col-3 mr-2' name='PerticularNote" + counterNGST + "' placeholder='Note'><input type='number' class='form-control col-2 mr-2' name='PerticularAmt" + counterNGST + "' required placeholder='Taxable Amount'><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" + counterNGST + "'  onclick='removeNGSTDivision(" + counterNGST + ")' >Remove</button></div>");
         $("#NGSTPerticularName").val("");
         counterNGST++;
     });
@@ -205,89 +205,6 @@ $(document).ready(function() {
             },
         });
     });
-
-    $("#addBtn").click(function() {
-        var pName = $("#perticularGSTName").val();
-        var id = $("#perticulersGST option")
-            .filter(function() {
-                return this.value == pName;
-            })
-            .data("id");
-
-        $("#selectGSTParticular").before(
-            "<div class='m-3 col-auto row' id='divPerticularNo" +
-            counterGST +
-            "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" +
-            counterGST +
-            "' value='" +
-            $("#perticularGSTName").val() +
-            "'readonly><input type='hidden' name='PerticularNo" +
-            counterGST +
-            "' value='" +
-            id +
-            "'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" +
-            counterGST +
-            "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" +
-            counterGST +
-            "'  onclick='removeGSTDivision(" +
-            counterGST +
-            ")' >Remove</button></div>"
-        );
-
-        $("#perticularGSTName").val("");
-        counterGST++;
-    });
-
-    $("#addNBtn").click(function() {
-        var pName = $("#NGSTPerticularName").val();
-        var id = $("#perticulersNGST option")
-            .filter(function() {
-                return this.value == pName;
-            })
-            .data("id");
-
-        $("#selectNGSTParticular").before(
-            "<div class='m-3 col-auto row' id='divPerticularNo" +
-            counterNGST +
-            "' ><input type='text' class='col-6 form-control mr-2' name='PerticularNo" +
-            counterNGST +
-            "' value='" +
-            $("#NGSTPerticularName").val() +
-            "'readonly><input type='hidden' name='PerticularNo" +
-            counterNGST +
-            "' value='" +
-            id +
-            "'><input type='number' class='form-control col-3 mr-2' name='PerticularAmt" +
-            counterNGST +
-            "' required><button type='button' class='btn btn-danger col-auto' id='btnPerticularNo" +
-            counterNGST +
-            "'  onclick='removeNGSTDivision(" +
-            counterNGST +
-            ")' >Remove</button></div>"
-        );
-        $("#NGSTPerticularName").val("");
-        counterNGST++;
-    });
-
-    // $("#firm").change(function() {
-    //     firmId = $("#firm").val();
-
-    //     var fYear = getFinancialYear();
-
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "getInvoiceNo.php",
-    //         data: {
-    //             "firmId": firmId,
-    //             "fYear": fYear
-    //         },
-    //         success: function(result) {
-    //             $("#invoiceNumber").val(result);
-    //             $("#NinvoiceNumber").val(result);
-    //             // console.log(result);
-    //         },
-    //     });
-    // });
 });
 
 function removeGSTDivision(cnt) {

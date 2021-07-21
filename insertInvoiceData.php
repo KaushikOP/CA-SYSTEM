@@ -7,8 +7,8 @@
         $firmId = $_COOKIE['firmId'];
         $clientId = $_COOKIE['clientId'];
 
-        // print_r($temp);
-
+        print_r($temp);
+        
         $formData  = array();
         $particulars = array();
 
@@ -36,6 +36,10 @@
 
         }
         
+        print_r($particulars);
+        print_r($formData);
+        return;
+
         $totalAmount = array_sum(array_values($particulars));
 
         if($firmId==3){
@@ -78,11 +82,11 @@
             echo "<script>alert('Error during Bill Master Generation');</script>";
         }  
         
-        echo "
+        /*echo "
             <script>
                 window.location = './fill.html';
             </script>
-        ";  
+        ";*/  
 
     }
 
