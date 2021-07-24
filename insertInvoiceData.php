@@ -49,7 +49,7 @@
             $queryBillMaster = "insert into bill_master values('".$formData[0]."',".$firmId.",'".$formData[1]."',".$clientId.",".$totalAmount.",0,0,0,0,0,0,null)";
         }
 
-        // print_r($formData);
+         print_r($formData);
         // echo "\n";
         // print_r($particulars);
 
@@ -57,7 +57,7 @@
         // echo $clientId;
         // echo $totalAmount;
         // echo $queryBillMaster;
-
+        return;
         $result = mysqli_query($con,$queryBillMaster);
         
         if($result){

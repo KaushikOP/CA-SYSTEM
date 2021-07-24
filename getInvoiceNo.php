@@ -3,13 +3,13 @@
 
     $firmId = 0;
     $fYear = 0;
-    $lastInvoiceNo = '2021-22/0';
+    $lastInvoiceNo = '2021-22/1';
 
     if(isset($_GET)){
         // print_r($_GET);
         $firmId =  $_GET['firmId'];
         $fYear = $_GET['fYear'];
-        $lastInvoiceNo = $fYear."/0";
+        $lastInvoiceNo = $fYear."/1";
         setcookie("firmId",$firmId);  //firmId for bill_master insertion
         $query = "select invoice_no from bill_master where firm_id=".$firmId." and invoice_no like '".$fYear."%' order by invoice_no DESC limit 1";
         
@@ -20,6 +20,5 @@
             }
         }
         echo $lastInvoiceNo;
-
     }
 ?>

@@ -51,7 +51,19 @@ $resultTable=null;
 
       $("#fYear").val(getFinancialYear());
 
-      
+      $("#export").click(function(){
+        var query = getCookie("queryString");
+        $("#query").val(query);
+        $("#excelForm").submit();
+      });
+
+
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      }
+
       function getFinancialYear(){
         var fiscalyear = "";
         var today = new Date();
@@ -128,6 +140,7 @@ $resultTable=null;
         });
       });
     });
+
 
     function handleEdit(id, action, firmId, invoice_no) {
       if (action == "Edit") {
@@ -223,6 +236,12 @@ $resultTable=null;
         <button id="filterDiv" class="btn btn-primary" width="100%">
           <h6>Filter Options</h6>
         </button>
+        <button id="export" class="btn btn-primary" width="100%" onClick="exportTableToExcel()">
+          <h6>Export to Excel</h6>
+        </button>
+        <form id="excelForm" method="POST" action="exportToExcel.php">
+          <input id="query" name="query" type="hidden">
+        </form>
       </div>
     </div>
     <hr>
@@ -355,7 +374,7 @@ $resultTable=null;
             table-striped
             table-bordered
             mt-5
-          " width="100%">
+          " width="100%" id="table">
       <thead style="background-color: rgb(79, 129, 189)">
         <tr style="color: white">
           <th>Sr. No.</th>
