@@ -317,14 +317,14 @@
 
                         <datalist id="perticulersGST">
                             <?php
-                $sql1="select * from services where firmNameId=3";
-                $result=mysqli_query($con,$sql1) or die($con->error);   
-                if($result->num_rows>0){
-                    while($row1=$result->fetch_assoc()){
+                $serviceSql1="select * from services where firmNameId=3";
+                $serviceResult1=mysqli_query($con,$serviceSql1) or die($con->error);   
+                if($serviceResult1->num_rows>0){
+                    while($serviceRow1=$serviceResult1->fetch_assoc()){
                     
                 ?>
-                            <option data-id="<?php echo $row1['serviceId']; ?>"> 
-                                <?php echo $row1["serviceName"]; ?>
+                            <option data-id="<?php echo $serviceRow1['serviceId']; ?>"> 
+                                <?php echo $serviceRow1["serviceName"]; ?>
                             </option>
                             <?php 
                     }
@@ -505,14 +505,14 @@
 
                         <datalist id="perticulersNGST">
                             <?php
-                $sql2="select * from services where SAC=0";
-                $result=mysqli_query($con,$sql2) or die($con->error);   
-                if($result->num_rows>0){
-                    while($row2=$result->fetch_assoc()){
+                $serviceSql2="select * from services where SAC=0";
+                $serviceResult2=mysqli_query($con,$serviceSql2) or die($con->error);   
+                if($serviceResult2->num_rows>0){
                     
+                    while($serviceRow2=$serviceResult2->fetch_assoc()){
                 ?>
-                            <option data-id="<?php echo $row2['serviceId']; ?>">
-                                <?php echo $row2["serviceName"]; ?>
+                            <option data-id="<?php echo $serviceRow2['serviceId']; ?>">
+                                <?php echo $serviceRow2["serviceName"]; ?>
                             </option>
                             <?php 
                     }

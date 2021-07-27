@@ -6,24 +6,33 @@
         $desc = $_POST['desc'];
         $sac = $_POST['sac'];
         $firm = $_POST['firm'];
+        
+        print_r($_POST);
 
-        $query = "select * from services where SAC = ".$sac;
-        $result = mysqli_query($con,$query);
-        if(mysqli_num_rows($result)>0){
-            echo "<script>alert('SAC Number already present');</script>";         
-        }else{
-            $query = "insert into services values(NULL,'".$name."','".$desc."',".$sac.",".$firm.")";
+        if($sac != ''){
+            $query = "select * from services where SAC = ".$sac;
             $result = mysqli_query($con,$query);
-    
-            if($result){
-                echo "<script>alert('Service Added Successfully');</script>";
-            }else{
-                echo "<script>alert('Error while adding Service');</script>";
+            if(mysqli_num_rows($result)>0){
+                echo "<script>alert('SAC Number already present');</script>";
+                echo "<script> location.replace('./newService.html'); </script>";
+                return; 
             }
+        }else{
+            $sac=0;
         }
 
+        $query = "insert into services values(NULL,'".$desc."','".$name."',".$sac.",".$firm.")";
+        $result = mysqli_query($con,$query);
+    
+        if($result){
+            echo "<script>alert('Service Added Successfully');</script>";
+        }else{
+            echo "<script>alert('Error while adding Service');</script>";
+        }
+        
 
-        echo "
+
+       echo "
             <script>
                 location.replace('./newService.html');
             </script>

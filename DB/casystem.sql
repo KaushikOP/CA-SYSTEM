@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2021 at 07:33 PM
+-- Generation Time: Jul 27, 2021 at 04:32 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -34,25 +34,44 @@ CREATE TABLE `bill_details` (
   `firm_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL,
   `taxable_amount` double NOT NULL,
-  `tax_amount` double NOT NULL
+  `tax_amount` double NOT NULL,
+  `service_note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `bill_details`
 --
 
-INSERT INTO `bill_details` (`bill_details_id`, `bill_master_id`, `firm_id`, `service_id`, `taxable_amount`, `tax_amount`) VALUES
-(1, '2021-22/0', 3, 4, 1000, 1180),
-(2, '2021-22/0', 3, 1, 2000, 2360),
-(3, '2021-22/1', 3, 4, 2000, 2360),
-(4, '2021-22/1', 3, 1, 3029, 3574.22),
-(5, '2021-22/1', 3, 2, 450, 531),
-(6, '2021-22/0', 1, 9, 1000, 0),
-(7, '2021-22/0', 1, 10, 2000, 0),
-(8, '2021-22/1', 1, 10, 1000, 0),
-(9, '2021-22/1', 1, 8, 2092, 0),
-(10, '2021-22/2', 3, 5, 1209, 1426.62),
-(11, '2021-22/2', 3, 2, 3448, 4068.64);
+INSERT INTO `bill_details` (`bill_details_id`, `bill_master_id`, `firm_id`, `service_id`, `taxable_amount`, `tax_amount`, `service_note`) VALUES
+(2, '2021-22/1', 3, 4, 3500, 4130, 'GSTR 9- FY 2019-20'),
+(3, '2021-22/3', 3, 2, 3500, 4130, 'TCHFL- FY 2019-20'),
+(4, '2021-22/4', 3, 4, 3000, 3540, 'Audit & I.T. Filing AY 2020-21'),
+(5, '2021-22/4', 3, 3, 2500, 2950, ''),
+(6, '2021-22/5', 3, 4, 8000, 9440, ''),
+(7, '2020-21/1', 3, 4, 10000, 11800, 'AY 2020-21'),
+(8, '2020-21/2', 3, 3, 12500, 14750, 'Renewal of 12AA & 80G Registration'),
+(9, '2020-21/3', 3, 4, 15000, 17700, 'Audit -AY 2020-21'),
+(10, '2020-21/1', 2, 10, 9000, 0, 'Jan 20 - Mar 20'),
+(11, '2020-21/1', 2, 9, 15000, 0, 'Jan 20 - Mar 20'),
+(12, '2020-21/2', 2, 14, 6500, 0, 'Surendra Khule'),
+(13, '2020-21/4', 3, 4, 55000, 64900, ''),
+(14, '2020-21/3', 2, 14, 30000, 0, ''),
+(15, '2020-21/1', 1, 15, 13000, 0, ''),
+(16, '2020-21/2', 1, 10, 9000, 0, 'Q2 FY 2020-21'),
+(17, '2020-21/2', 1, 9, 15000, 0, 'Q2 FY 2020-21'),
+(18, '2020-21/2', 1, 16, 4000, 0, 'FY 2020-21'),
+(19, '2020-21/3', 1, 17, 2000, 0, ''),
+(20, '2020-21/4', 1, 10, 7500, 0, ' Swavin Business Consultants Pvt Ltd'),
+(21, '2020-21/5', 1, 10, 10000, 0, 'First Insight FY 2019-20'),
+(22, '2020-21/6', 1, 10, 10000, 0, 'First Insight FY 2019-20 (Cash) Total Bill Rs. 20000'),
+(23, '2020-21/4', 2, 18, 6000, 0, '3 days'),
+(24, '2020-21/4', 2, 10, 15000, 0, 'Q2 - First Insight'),
+(25, '2020-21/7', 1, 9, 16500, 0, 'Q4 -FY 2019-20'),
+(26, '2020-21/7', 1, 10, 4500, 0, 'Q4 -FY 2019-20'),
+(27, '2020-21/7', 1, 7, 1500, 0, 'Q4 -FY 2019-20'),
+(28, '2020-21/5', 2, 7, 1500, 0, 'Q4 -FY 2019-20'),
+(29, '2020-21/6', 2, 9, 15000, 0, '31.03.20'),
+(30, '2020-21/6', 2, 14, 15000, 0, 'Certification & Submissions');
 
 -- --------------------------------------------------------
 
@@ -80,11 +99,28 @@ CREATE TABLE `bill_master` (
 --
 
 INSERT INTO `bill_master` (`invoice_no`, `firm_id`, `invoice_date`, `client_id`, `total_amount`, `amount_received`, `receipt_date`, `payment_mode`, `cheque_no`, `amount_pending`, `tds`, `state_code`) VALUES
-('2021-22/0', 1, '2021-07-01', 3, 3000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
-('2021-22/0', 3, '2021-07-02', 1, 3540, 0, '0000-00-00', '0', '0', '0', 0, 27),
-('2021-22/1', 1, '2021-07-01', 1, 3092, 0, '0000-00-00', '0', '0', '0', 0, NULL),
-('2021-22/1', 3, '2021-04-09', 4, 6465.22, 0, '0000-00-00', '0', '0', '0', 0, 24),
-('2021-22/2', 3, '2021-03-16', 4, 5495.26, 0, '0000-00-00', '0', '0', '0', 0, 24);
+('2020-21/1', 1, '2021-01-05', 18, 13000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/1', 2, '2020-04-26', 15, 24000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/1', 3, '2021-01-01', 13, 11800, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2020-21/2', 1, '2020-11-02', 15, 28000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/2', 2, '2020-04-26', 17, 6500, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/2', 3, '2021-01-04', 10, 14750, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2020-21/3', 1, '2020-12-01', 17, 2000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/3', 2, '2020-09-17', 18, 30000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/3', 3, '2021-01-09', 14, 17700, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2020-21/4', 1, '2020-10-26', 19, 7500, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/4', 2, '2020-09-04', 19, 21000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/4', 3, '2020-09-01', 18, 64900, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2020-21/5', 1, '2020-10-26', 19, 10000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/5', 2, '2020-10-09', 20, 1500, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/6', 1, '2020-10-26', 19, 10000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/6', 2, '2020-10-09', 20, 30000, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2020-21/7', 1, '2020-07-13', 11, 22500, 0, '0000-00-00', '0', '0', '0', 0, NULL),
+('2021-22/1', 3, '2021-03-24', 8, 4130, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2021-22/2', 3, '2021-03-24', 9, 0, 0, '0000-00-00', '0', '0', '0', 0, 4),
+('2021-22/3', 3, '2020-09-29', 10, 4130, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2021-22/4', 3, '2020-10-26', 11, 6490, 0, '0000-00-00', '0', '0', '0', 0, 27),
+('2021-22/5', 3, '2020-12-18', 12, 9440, 0, '0000-00-00', '0', '0', '0', 0, 27);
 
 -- --------------------------------------------------------
 
@@ -95,7 +131,7 @@ INSERT INTO `bill_master` (`invoice_no`, `firm_id`, `invoice_date`, `client_id`,
 CREATE TABLE `clientlist` (
   `clientId` int(11) NOT NULL,
   `clientName` text NOT NULL,
-  `GST` varchar(15) NOT NULL,
+  `GST` varchar(15) DEFAULT NULL,
   `clientAddress` longtext DEFAULT NULL,
   `mobile_no` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -108,7 +144,20 @@ INSERT INTO `clientlist` (`clientId`, `clientName`, `GST`, `clientAddress`, `mob
 (1, 'REAL LAMINATES', '27AAFFR1902F1ZJ', 'Plot No. 13, New Timber Market, Bhawani Peth, Pune 411 002.', '1234567795'),
 (2, 'B. U. BHANDARI VAASTU', '27AAHFB1197Q1ZV', 'Gandhinagar', ''),
 (3, 'B. U. BHANDARI ERANDWANA (AOP)', '27AACAB9561G1ZN', '', '9876543211'),
-(4, 'SANKET IMPEX\r\n', '27AOIPB9142E1Z4', '1ST FLOOR, SAMRAT HOUSE, 39 - D, 2/6, SHANKARSETH ROAD PUNE - 411037\r\n', '');
+(4, 'SANKET IMPEX\r\n', '27AOIPB9142E1Z4', '1ST FLOOR, SAMRAT HOUSE, 39 - D, 2/6, SHANKARSETH ROAD PUNE - 411037\r\n', ''),
+(8, 'Royal Crown Laminates', '27AAVFR9464L1Z1', '5 Timber Market, Bhavani Peth, Near Association Building, Pune-411002', ''),
+(9, 'Rajiv Traders', '27ADYPG5964A1Z8', 'Market Yard, Pune 411037', ''),
+(10, 'Tara Mobile Creches', '', '1st Floor, Parvati Sadan, Lane 14, After Pune International School, Tingrenagar, Pune 411015', ''),
+(11, 'Rosewood Laminates', '27ABAFR2195J1ZY', 'Plot No. 116, New Timber Market, Pune - 411042', ''),
+(12, 'G C Electric Company', '27AABFG1103D1Z9', '458, Budhwar Peth, Pune 411002', ''),
+(13, 'Autuskey Technology Development Pvt Ltd', '27AANCA5372R1ZT', '01, Unit No F1, Phoenix Market City, East Court, Wadgaon Sheri, Pune- 411058', ''),
+(14, 'Mr. Sunil Desadla', '27AAVPD3373J1ZA', 'Desadla House, Plot No. A-55, Puru Co-operative Housing Society Ltd., New Airport Road, Lohegaon', ''),
+(15, 'Guiding Light Consultants', '', 'C 501, Yin Yang, Vitthal Nagar, Kharadi, Pune-411014', ''),
+(16, 'Anila Nair (iGrowMe Consultants)', '', 'Flat No. B 701, Lourdes Citadel, Bapusaheb Bagwe Road, Navagaon, Dahisar West, Mumbai-400068', ''),
+(17, 'Bhargav Pattani', '', '43, 8th Floor, Nirmal Park, A wing, Satara Road, Opp. Aero Honda Showroom, Pune-411043', ''),
+(18, 'Bora Agro Foods', '27AABFB4517E1ZW', '1st Floor, Samrat House, 39-D, 2/6, Shankar Sheth Road, Pune 411037', ''),
+(19, 'M B Associates', '', 'Pune', ''),
+(20, 'Kainos Global Foundation', '', 'Flat No 4/3, Champaratna Nagari, Uday Baug, Pune 411013', '');
 
 -- --------------------------------------------------------
 
@@ -214,7 +263,14 @@ INSERT INTO `services` (`serviceId`, `serviceDescription`, `serviceName`, `SAC`,
 (8, '', 'INCOME TAX RETURN FILING FEES\r\n', 0, 1),
 (9, '', 'ACCOUNTING/BOOK KEEPING FEES\r\n', 0, 1),
 (10, '', 'GST RETURN FILING FEES\r\n', 0, 1),
-(11, 'Test Service', 'This is a test service', 123456, 2);
+(11, 'Test Service', 'This is a test service', 123456, 2),
+(12, NULL, 'Other Similar Services', 998224, 3),
+(13, NULL, 'GST Registration', 0, 2),
+(14, '', 'Professional Fees', 0, 2),
+(15, '', 'Retainership Fees', 0, 1),
+(16, '', 'Application of TRC', 0, 1),
+(17, '', 'Consultation Fees', 0, 1),
+(18, '', 'Audit Supervision', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -296,13 +352,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bill_details`
 --
 ALTER TABLE `bill_details`
-  MODIFY `bill_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `bill_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `clientlist`
 --
 ALTER TABLE `clientlist`
-  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `firmname`
@@ -320,7 +376,7 @@ ALTER TABLE `gst_state_code_list`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `serviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `serviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
