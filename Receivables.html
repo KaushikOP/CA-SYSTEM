@@ -45,6 +45,10 @@ $resultTable=null;
 
   <!-- FOR jQuery cookie -->
 
+  <style>
+    .pointer {cursor: pointer;}
+  </style>
+
   <script>
     $(document).ready(function () {
 
@@ -193,6 +197,10 @@ $resultTable=null;
 
     function refreshDivs() {
       $("#tblDiv").load("#tblDiv .tbl");
+    }
+
+    function billDetails(abc){
+      document.getElementById(abc).submit();
     }
   </script>
   <title>Receivables</title>
@@ -413,8 +421,9 @@ $resultTable=null;
           <td class="text-left">
             <?php echo $row['shortForm']; ?>
           </td>
-          <td class="text-left">
+          <td class="text-left text-decoration-underline text-primary pointer" onClick='billDetails( "<?php echo $row['firmNameId'].':'.$row['invoice_no']; ?>" )'>
             <?php echo $row['invoice_no']; ?>
+            <form id="<?php echo $row['firmNameId'].':'.$row['invoice_no']; ?>" method="POST" action="billDetails.html"><input type="hidden" name="id" value="<?php echo $row['firmNameId'].':'.$row['invoice_no'] ?>"></form>
           </td>
           <td class="text-right">
             <?php echo $row['invoice_date']; ?>
