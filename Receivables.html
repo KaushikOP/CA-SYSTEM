@@ -421,10 +421,19 @@ $resultTable=null;
           <td class="text-left">
             <?php echo $row['shortForm']; ?>
           </td>
+          <?php if ($row['amount_received'] != 1){ ?>
           <td class="text-left text-decoration-underline text-primary pointer" onClick='billDetails( "<?php echo $row['firmNameId'].':'.$row['invoice_no']; ?>" )'>
             <?php echo $row['invoice_no']; ?>
-            <form id="<?php echo $row['firmNameId'].':'.$row['invoice_no']; ?>" method="POST" action="billDetails.html"><input type="hidden" name="id" value="<?php echo $row['firmNameId'].':'.$row['invoice_no'] ?>"></form>
+            <form id="<?php echo $row['firmNameId'].':'.$row['invoice_no']; ?>" method="GET" action="billDetails.html"><input type="hidden" name="id" value="<?php echo $row['firmNameId'].':'.$row['invoice_no'] ?>"></form>
           </td>
+          <?php }
+          else{
+          ?>
+          <td class="text-left">
+            <?php echo $row['invoice_no']; ?>
+          </td>
+          <?php  
+          } ?>
           <td class="text-right">
             <?php echo $row['invoice_date']; ?>
           </td>

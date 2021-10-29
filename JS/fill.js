@@ -173,8 +173,10 @@ $(document).ready(function() {
             success: function(result) {
                 if (result) {
                     obj = JSON.parse(result);
+                    console.log(obj[3]);
                     $("#clientAddr").val(obj[0]);
                     $("#clientGST").val(obj[1]);
+                    $("#stateCode").val(obj[3]);
                 }
             },
         });
@@ -199,6 +201,7 @@ $(document).ready(function() {
             success: function(result) {
                 if (result) {
                     var obj = JSON.parse(result);
+                    console.log(obj + " DataN");
                     $("#NclientAddr").val(obj[0]);
                     $("#NclientGST").val(obj[1]);
                 }

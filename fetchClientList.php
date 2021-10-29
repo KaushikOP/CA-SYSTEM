@@ -19,6 +19,8 @@ if(isset($_POST)){
             }
             
         }
+        $state_code = (int)substr($clientDetails[1], 0,2);
+        array_push($clientDetails,$state_code);
         echo json_encode($clientDetails);
     }
 ?>

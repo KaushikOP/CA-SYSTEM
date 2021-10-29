@@ -26,7 +26,7 @@
             
         }
 
-        header("Content-Type: application/ms-excel;charset=utf-8"); 
+        header("Content-Type: application/vnd.ms-excel;charset=utf-8"); 
         header("Content-Disposition: attachment; filename=\"$fileName\""); 
         header("Expires: 0");
         // Render excel data 

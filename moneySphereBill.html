@@ -1,5 +1,10 @@
-<!DOCTYPE html>
+<?php
+    require_once 'connect.php';
 
+    $var = explode(":",$_POST['id']);
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -24,40 +29,54 @@
     $(document).ready(function(){
         $('#printPage').click(function (){
             console.log("1");
-            $("#printArea").save();
+            $("#printArea").print();
         });
     });
 </script>
 
 </head>
     <body>
+    <center><button id="printPage" class="btn btn-success mt-5 m-5 text-center">Print page</button></center>
        <div id="printArea" class="container bg-muted border border-dark">
             <div class="row col-12">
                 <div class="col-8">
                     <h1 class="text-center mt-5 pt-3" style="color:darkblue;">MONEYSPHERE SOLUTIONS</h1>
                 </div>
                 <div class="col-2"></div>
+
+
+                <?php 
+                    $sql1="select * from bill_master bm inner join firmname f inner join clientlist c on bm.firm_id=f.firmNameId and bm.client_id=c.clientId where bm.firm_id=$var[0] and bm.invoice_no = '$var[1]'";
+                    $result1=mysqli_query($con,$sql1) or die($con->error);
+                    $row1;
+                    if($result1->num_rows==1){
+                        $row1=$result1->fetch_assoc();
+                        //print_r($row1);
+                    }
+                ?>
+
+
                 <div class="col-2">
                     <h3 class="text-center text-decoration-underline pt-5" style="color:darkblue;"><i>INVOICE</i></h3>
                     <div class="col-12 p-1 border border-muted">
-                        <h6><b>Date:</b> April 7, 2021</h6>
+                        <h6><b>Date:</b> <?php echo $row1['invoice_date']; ?></h6>
                     </div>
                     <div class="col-12 p-1 border border-muted">
-                        <h6><b>Invoice:</b> 2021-22/002</h6>
+                        <h6><b>Invoice:</b> <?php echo $row1['invoice_no']; ?></h6>
                     </div>    
                 </div>
             </div>
 
             <div class="col-12 pt-5">
                 <h5 style="background:darkblue" class="text-light p-2 mt-2">Bill to:</h5>
-                <table class="table border-5 table-striped table-bordered">
+                <table class="table table-light table-bordered">
                         <tr>
                             <th>Name:</th>
-                            <td>Sansui Electronics Pvt. Ltd.</td>
+                            <td><?php echo $row1['clientName']; ?></td>
                         </tr>
                         <tr>
                             <th>Address:</th>
-                            <td>Plot No E-59, Sansui House, Market Yard, Pune - 37</td>
+                            <td><?php echo $row1['clientAddress']; ?></td>
                         </tr>
                 </table>
             </div>
@@ -65,27 +84,46 @@
             
             <div class="mt-4 col-12">
                 <h5 style="background:darkblue" class="text-light p-2 mt-2">Perticulars:</h5>
-                <table align="center" class="table border-5 table-bordered table table-responsive-sm table-striped">
+                <table align="center" class="table table-bordered table-responsive-sm table-light">
                     <thead>
                         <tr>
                             <th>Sr. No.</th>
-                            <th>Description</th>
+                            <th>Service</th>
+                            <th>Service Note</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
+
+
+                    <?php 
+                        $sql="select * from bill_details bd inner join services s inner join bill_master bm on bd.service_id=s.serviceId and bm.firm_id=bd.firm_id and bm.invoice_no=bd.bill_master_id  where bd.firm_id = $var[0] and bd.bill_master_id = '$var[1]'";
+                        $result=mysqli_query($con,$sql) or die($con->error);
+                        if($result->num_rows>0){
+                            $row_count=0;
+                            while($row=$result->fetch_assoc()){
+                                $row_count+=1;
+                                //print_r($row);
+                    ?>
+
+
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Filing/ Reconciliation of GSTR 2A - April-20 to Dec - 20</td>
-                            <td>15  000.00</td>
+                            <td><?php echo $row['serviceName']; ?></td>
+                            <td><?php echo $row['service_note']; ?></td>
+                            <td><?php echo $row['taxable_amount']; ?></td>
                         </tr>
                     </tbody>
+                    <?php 
+                        }
+                    }
+                    ?>
                 </table>
             </div>
 
             <div class="row col-12 mt-3">
                 <div class="col-4">
-                    <table width="90%" class="text-left border border-5">
+                    <table width="90%" class="text-left border border-1">
                         <tr><th class="text-light" style="background:darkblue">&nbsp;&nbsp;&nbsp;Bank Info: MONEYSPHERE SOLUTIONS</th></tr>
                         <tr><td>&nbsp;&nbsp;&nbsp;Bank: Indusind Bank</td></tr>
                         <tr><td>&nbsp;&nbsp;&nbsp;Branch: Pune Camp</td></tr>
@@ -102,7 +140,7 @@
                     <table width="80%" align="right">
                         <th>Total Rs.</th>
                         <td></td>
-                        <td class="text-right">15000.00</td>
+                        <td class="text-right"><?php echo ' ₹ '.$row1['total_amount'].' /-' ; ?></td>
                     </table>
 
                     <h5 class="mt-5 pt-5">For</h5>
@@ -119,7 +157,5 @@
             <h6 class="text-center font-weight-bold">802, Ratna building, Sujay Garden, Mukundnagar, Pune 411037</h6>
             <h6 class="text-center">Tel: +91-7666570182/+91-992124004 Office: (020)-4861 0391 E-mail:harshal@cahmistry.com/ haresh@cahmistry.com</h6>
         </div>
-
-        <center><button id="printPage" class="btn btn-success mt-5 m-5 text-center">Print page</button></center>
     </body>
 </html>

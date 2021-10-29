@@ -1,3 +1,16 @@
+<?php
+    require_once 'connect.php';
+
+    $var = explode(":",$_POST['id']);
+    
+    $sql1="select * from bill_master bm inner join firmname f inner join clientlist c on bm.firm_id=f.firmNameId and bm.client_id=c.clientId where bm.firm_id=$var[0] and bm.invoice_no = '$var[1]'";
+    $result1=mysqli_query($con,$sql1) or die($con->error);
+        $row1;
+        if($result1->num_rows==1){
+            $row1=$result1->fetch_assoc();
+            //print_r($row1);
+        }
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,72 +28,106 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.2/jQuery.print.min.js" integrity="sha512-t3XNbzH2GEXeT9juLjifw/5ejswnjWWMMDxsdCg4+MmvrM+MwqGhxlWeFJ53xN/SBHPDnW0gXYvBx/afZZfGMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="JS/numToWord.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#numToWord").html($("#numToWord").html() + convert(<?php echo $row1['total_amount']; ?>)+" Only.");
+
+                $('#printPage').click(function (){
+                    $("#printArea").print();
+                });
+            });
+        </script>
 </head>
 
 <body>
-    <div class="container bg-muted border border-dark">
-        <div class="row col-12 mt-3">
-            <div class="col-2">
-                <img src="images/CA.png" class="img-thumbnail border-0" width="150" alt="">
-            </div>
-            <div class="col-10" style="color:darkmagenta">
-            <h2 class="text-center">Jinal Waghela & Associates</h2>
-            <h4 class="text-center">Proprietor: Jinal Mistry</h4>
-            </div>
+
+    <center><button id="printPage" class="btn btn-success mt-5 m-5 text-center">Print page</button></center>
+    <div id="printArea" class="container bg-muted border border-dark">
+        <div class="row col-12 mt-3" style="color:darkmagenta">
+                <div class="col-auto"><img src="images/CA.png" class="img-thumbnail border-0" width="150" alt=""></div>
+                <div class="col-9"><h2 class="text-center">Jinal Waghela & Associates</h2>
+                <h4 class="text-center">Proprietor: Jinal Mistry</h4></div>
+                <div class="col-auto"></div>
         </div>
+
         <div class="row col-12 mt-2">
             <div class="col-2"></div>
-                <div class="col-8 text-center">
+                <div class="col-7 text-center">
                     <h3 class="text-center" style="color:darkmagenta">Invoice</h3>
                 </div>
-            <div class="col-2">
+            <div class="col-3">
                  <div class="col-12 border border-muted">
-                        <b>Date:</b>
-                        <h6>April 7, 2021</h6>
+                        <h6 class="text-center"><b>Date:</b>
+                        <?php echo $row1['invoice_date']; ?></h6>
                     </div>
                     <div class="col-12 border border-muted">
-                        <b>Invoice:</b>
-                        <h6>2021-22/002</h6>
+                        <h6 class="text-center"><b>Invoice:</b>
+                        <?php echo $row1['invoice_no']; ?></h6>
                     </div>    
                 </div>
             </div>
         <div class="col-12">
             <h5 style="background:darkmagenta" class="text-light p-2 mt-2">Bill to:</h5>
-            <table class="table border-5 table-striped table-bordered">
+            <table class="table table-light table-bordered">
                     <tr>
                         <th>Name:</th>
-                        <td>Shilpi Daniel</td>
+                        <td><?php echo $row1['clientName']; ?></td>
                     </tr>
                     <tr>
                         <th>Address:</th>
-                        <td>Desadla House, Plot No. A-55, Puru Co-operative Housing Society Ltd., New Airport Road, Lohegaon</td>
+                        <td><?php echo $row1['clientAddress']; ?></td>
                     </tr>
             </table>
         </div>
 
         <div class="mt-4 col-12">
         <h5 style="background:darkmagenta" class="text-light p-2 mt-2">Perticulars:</h5>
-            <table align="center" class="table border-5 table-bordered table table-responsive-sm table-striped">
+            <table align="center" class="table table-bordered table table-responsive-sm table-light">
                 <thead>
                     <tr>
                         <th>Sr. No.</th>
-                        <th>Description</th>
+                        <th>Service</th>
+                        <th>Service Note</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
+
+
+                <?php 
+                    $sql="select * from bill_details bd inner join services s inner join bill_master bm on bd.service_id=s.serviceId and bm.firm_id=bd.firm_id and bm.invoice_no=bd.bill_master_id  where bd.firm_id = $var[0] and bd.bill_master_id = '$var[1]'";
+                    $result=mysqli_query($con,$sql) or die($con->error);
+                    if($result->num_rows>0){
+                        $row_count=0;
+                        while($row=$result->fetch_assoc()){
+                            $row_count+=1;
+                            //print_r($row);
+                ?>
+
+
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Reply to Notice & Submission</td>
-                        <td>2000.00</td>
+                        <td><?php echo $row['serviceName']; ?></td>
+                        <td><?php echo $row['service_note']; ?></td>
+                        <td><?php echo $row['taxable_amount']; ?></td>
                     </tr>
                 </tbody>
+                    <?php 
+                        }
+                    }
+                    ?>
             </table>
         </div>
-        <h6 class="ml-5">Amount in Words: Rupees Two Thousand Only</h6>
+        <h6 id="numToWord" class="ml-3">Amount in Words: </h6>
         <div class="row col-12 mt-3">
             <div class="col-4">
-                <table width="90%" class="text-left border border-5">
+                <table width="90%" class="text-left border border-1">
                     <tr><th class="text-light" style="background:darkmagenta">&nbsp;&nbsp;&nbsp;Bank Details: Jinal Mistry</th></tr>
                     <tr><td>&nbsp;&nbsp;&nbsp;Bank: Indusind Bank</td></tr>
                     <tr><td>&nbsp;&nbsp;&nbsp;Branch: Pune Camp</td></tr>
@@ -97,7 +144,7 @@
                 <table width="80%" align="right">
                     <th>Total Rs.</th>
                     <td></td>
-                    <td class="text-right">2000.00</td>
+                    <td class="text-right"><?php echo ' ₹ '.$row1['total_amount'].' /-' ; ?></td>
                 </table>
 
                 <h5 class="mt-5 pt-5">For</h5>
