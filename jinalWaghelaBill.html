@@ -1,4 +1,14 @@
 <?php
+
+    if($_COOKIE['loggedIn']==0){
+            echo "
+                <script>
+                    alert('User not logged in...Please log in first');
+                    window.location ='index.html';
+                </script>
+            ";
+        }
+
     require_once 'connect.php';
 
     $var = explode(":",$_POST['id']);
@@ -41,7 +51,13 @@
                 $('#printPage').click(function (){
                     $("#printArea").print();
                 });
+
+                $("#logout").click(function(){
+                    document.cookie="loggedIn=0";
+                    window.location = 'logout.php';
+                });
             });
+
         </script>
 </head>
 

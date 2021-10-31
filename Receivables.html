@@ -1,4 +1,15 @@
 <?php
+
+if($_COOKIE['loggedIn']==0){
+            echo "
+                <script>
+                    alert('User not logged in...Please log in first');
+                    window.location ='index.html';
+                </script>
+            ";
+        }
+
+
 include 'connect.php';
 
 $resultTable=null;
@@ -52,6 +63,10 @@ $resultTable=null;
   <script>
     $(document).ready(function () {
 
+      $("#logout").click(function(){
+                document.cookie="loggedIn=0";
+                window.location = 'logout.php';
+            });
 
       $("#fYear").val(getFinancialYear());
 
@@ -213,7 +228,7 @@ $resultTable=null;
         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">DMS</a>
+      <a class="navbar-brand" href="home.html">DMS</a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -232,6 +247,7 @@ $resultTable=null;
             <a class="nav-link" href="GST-StateList.html">GST Codes</a>
           </li>
         </ul>
+        <button id="logout" class="btn btn-danger text-light" type="button">Logout</button>
       </div>
     </div>
   </nav>

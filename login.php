@@ -9,9 +9,11 @@
     
     if($result){
         if(mysqli_num_rows($result)==1){
+            session_start();
             echo "
                 <script>
-                    alert('Logged in');        
+                    alert('Logged in'); 
+                    document.cookie = 'loggedIn=1';       
                     location.replace('fill.html');
                 </script>
             ";

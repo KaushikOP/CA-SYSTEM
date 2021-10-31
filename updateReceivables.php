@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     include 'connect.php';
     $firmId = 0;
     $invoice = -1;
